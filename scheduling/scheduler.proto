@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package zorro;
+option go_package = "github.com/Acedyn/zorro-proto/scheduling";
+
+import "tools/command.proto";
+import "processor/processor.proto";
+
+// Multiple values can be exchanged with the processor
+message processorCommunication {
+  optional Command command_update = 1;
+  optional Processor processor_update = 2;
+}
+
+service Scheduling {
+  // For processors to start running their commands
+  rpc RegisterProcessor(Processor) returns (Processor);
+}
