@@ -30,3 +30,23 @@ push your changes to make them usable on the other zorro repositories
 ```bash
 python -m pip install grpcio-tools
 ```
+
+- Generate the python code
+
+```bash
+python -m grpc_tools.protoc -I. --python_out=. --pyi_out=. --grpc_python_out=. ./*/*.proto
+```
+
+### Node
+
+- Install the python protoc generator
+
+```bash
+python -m pip install grpcio-tools
+```
+
+- Generate the python code
+
+```bash
+python -m grpc_tools.protoc -I. --python_out=. --pyi_out=. --grpc_python_out=. ./*/*.proto
+```
