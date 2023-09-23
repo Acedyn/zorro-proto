@@ -15,15 +15,15 @@ message Plugin {
   // The version is composed of multiple subversions separated with a dot
   string version = 2;
   // User friently version of the name without all its contraints
-  optional string label = 3;
+  string label = 3;
   // The path to the plugin definition
-  optional string path = 4;
+  string path = 4;
   // A list of plugin request that needs to be resolved for this plugin
   repeated string require = 5;
   // Each plugins will alter the environment generated
   map<string, PluginEnv> env = 6;
   // Each plugins will alter the environment generated
-  optional PluginTools tools = 7;
+  PluginTools tools = 7;
   // List of processors to register as available processors to launch
   repeated Processor processors = 8;
 }

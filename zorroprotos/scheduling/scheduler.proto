@@ -6,13 +6,13 @@ option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/scheduling";
 import "zorroprotos/tools/command.proto";
 import "zorroprotos/processor/processor.proto";
 
-// Multiple values can be exchanged with the processor
-message processorCommunication {
-  optional Command command_update = 1;
-  optional Processor processor_update = 2;
+// Parameters for processor registration
+message ProcessorRegistration {
+  Processor processor = 1;
+  string host = 2;
 }
 
 service Scheduling {
   // For processors to start running their commands
-  rpc RegisterProcessor(Processor) returns (Processor);
+  rpc RegisterProcessor(ProcessorRegistration) returns (Processor);
 }
