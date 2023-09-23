@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 from zorroprotos.processor import processor_status_pb2 as zorroprotos_dot_processor_dot_processor__status__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%zorroprotos/processor/processor.proto\x12\x05zorro\x1a,zorroprotos/processor/processor_status.proto\"\xf8\x04\n\tProcessor\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x14\n\x07version\x18\x03 \x01(\tH\x00\x88\x01\x01\x12\x12\n\x05label\x18\x04 \x01(\tH\x01\x88\x01\x01\x12\r\n\x05paths\x18\x05 \x03(\t\x12\x0f\n\x07subsets\x18\x06 \x03(\t\x12#\n\x16start_program_template\x18\x07 \x01(\tH\x02\x88\x01\x01\x12%\n\x18start_processor_template\x18\x08 \x01(\tH\x03\x88\x01\x01\x12+\n\x06status\x18\t \x01(\x0e\x32\x16.zorro.ProcessorStatusH\x04\x88\x01\x01\x12\x10\n\x03pid\x18\n \x01(\x05H\x05\x88\x01\x01\x12\x30\n\x08metadata\x18\x0b \x03(\x0b\x32\x1e.zorro.Processor.MetadataEntry\x12,\n\x06stdout\x18\x0c \x03(\x0b\x32\x1c.zorro.Processor.StdoutEntry\x12,\n\x06stderr\x18\r \x03(\x0b\x32\x1c.zorro.Processor.StderrEntry\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a-\n\x0bStdoutEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a-\n\x0bStderrEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\n\n\x08_versionB\x08\n\x06_labelB\x19\n\x17_start_program_templateB\x1b\n\x19_start_processor_templateB\t\n\x07_statusB\x06\n\x04_pidB5Z3github.com/Acedyn/zorro-proto/zorroprotos/processorb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%zorroprotos/processor/processor.proto\x12\x05zorro\x1a,zorroprotos/processor/processor_status.proto\"\xec\x03\n\tProcessor\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\x03 \x01(\t\x12\r\n\x05label\x18\x04 \x01(\t\x12\r\n\x05paths\x18\x05 \x03(\t\x12\x0f\n\x07subsets\x18\x06 \x03(\t\x12\x1e\n\x16start_program_template\x18\x07 \x01(\t\x12 \n\x18start_processor_template\x18\x08 \x01(\t\x12&\n\x06status\x18\t \x01(\x0e\x32\x16.zorro.ProcessorStatus\x12\x30\n\x08metadata\x18\n \x03(\x0b\x32\x1e.zorro.Processor.MetadataEntry\x12,\n\x06stdout\x18\x0b \x03(\x0b\x32\x1c.zorro.Processor.StdoutEntry\x12,\n\x06stderr\x18\x0c \x03(\x0b\x32\x1c.zorro.Processor.StderrEntry\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a-\n\x0bStdoutEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a-\n\x0bStderrEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x35Z3github.com/Acedyn/zorro-proto/zorroprotos/processorb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -30,11 +30,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _PROCESSOR_STDERRENTRY._options = None
   _PROCESSOR_STDERRENTRY._serialized_options = b'8\001'
   _globals['_PROCESSOR']._serialized_start=95
-  _globals['_PROCESSOR']._serialized_end=727
-  _globals['_PROCESSOR_METADATAENTRY']._serialized_start=489
-  _globals['_PROCESSOR_METADATAENTRY']._serialized_end=536
-  _globals['_PROCESSOR_STDOUTENTRY']._serialized_start=538
-  _globals['_PROCESSOR_STDOUTENTRY']._serialized_end=583
-  _globals['_PROCESSOR_STDERRENTRY']._serialized_start=585
-  _globals['_PROCESSOR_STDERRENTRY']._serialized_end=630
+  _globals['_PROCESSOR']._serialized_end=587
+  _globals['_PROCESSOR_METADATAENTRY']._serialized_start=446
+  _globals['_PROCESSOR_METADATAENTRY']._serialized_end=493
+  _globals['_PROCESSOR_STDOUTENTRY']._serialized_start=495
+  _globals['_PROCESSOR_STDOUTENTRY']._serialized_end=540
+  _globals['_PROCESSOR_STDERRENTRY']._serialized_start=542
+  _globals['_PROCESSOR_STDERRENTRY']._serialized_end=587
 # @@protoc_insertion_point(module_scope)

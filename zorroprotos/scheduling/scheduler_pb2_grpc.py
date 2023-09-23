@@ -3,6 +3,7 @@
 import grpc
 
 from zorroprotos.processor import processor_pb2 as zorroprotos_dot_processor_dot_processor__pb2
+from zorroprotos.scheduling import scheduler_pb2 as zorroprotos_dot_scheduling_dot_scheduler__pb2
 
 
 class SchedulingStub(object):
@@ -16,7 +17,7 @@ class SchedulingStub(object):
         """
         self.RegisterProcessor = channel.unary_unary(
                 '/zorro.Scheduling/RegisterProcessor',
-                request_serializer=zorroprotos_dot_processor_dot_processor__pb2.Processor.SerializeToString,
+                request_serializer=zorroprotos_dot_scheduling_dot_scheduler__pb2.ProcessorRegistration.SerializeToString,
                 response_deserializer=zorroprotos_dot_processor_dot_processor__pb2.Processor.FromString,
                 )
 
@@ -36,7 +37,7 @@ def add_SchedulingServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'RegisterProcessor': grpc.unary_unary_rpc_method_handler(
                     servicer.RegisterProcessor,
-                    request_deserializer=zorroprotos_dot_processor_dot_processor__pb2.Processor.FromString,
+                    request_deserializer=zorroprotos_dot_scheduling_dot_scheduler__pb2.ProcessorRegistration.FromString,
                     response_serializer=zorroprotos_dot_processor_dot_processor__pb2.Processor.SerializeToString,
             ),
     }
@@ -61,7 +62,7 @@ class Scheduling(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/zorro.Scheduling/RegisterProcessor',
-            zorroprotos_dot_processor_dot_processor__pb2.Processor.SerializeToString,
+            zorroprotos_dot_scheduling_dot_scheduler__pb2.ProcessorRegistration.SerializeToString,
             zorroprotos_dot_processor_dot_processor__pb2.Processor.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

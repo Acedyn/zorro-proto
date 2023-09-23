@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SchedulingClient interface {
 	// For processors to start running their commands
-	RegisterProcessor(ctx context.Context, in *processor.Processor, opts ...grpc.CallOption) (*processor.Processor, error)
+	RegisterProcessor(ctx context.Context, in *ProcessorRegistration, opts ...grpc.CallOption) (*processor.Processor, error)
 }
 
 type schedulingClient struct {
@@ -35,7 +35,7 @@ func NewSchedulingClient(cc grpc.ClientConnInterface) SchedulingClient {
 	return &schedulingClient{cc}
 }
 
-func (c *schedulingClient) RegisterProcessor(ctx context.Context, in *processor.Processor, opts ...grpc.CallOption) (*processor.Processor, error) {
+func (c *schedulingClient) RegisterProcessor(ctx context.Context, in *ProcessorRegistration, opts ...grpc.CallOption) (*processor.Processor, error) {
 	out := new(processor.Processor)
 	err := c.cc.Invoke(ctx, "/zorro.Scheduling/RegisterProcessor", in, out, opts...)
 	if err != nil {
@@ -49,7 +49,7 @@ func (c *schedulingClient) RegisterProcessor(ctx context.Context, in *processor.
 // for forward compatibility
 type SchedulingServer interface {
 	// For processors to start running their commands
-	RegisterProcessor(context.Context, *processor.Processor) (*processor.Processor, error)
+	RegisterProcessor(context.Context, *ProcessorRegistration) (*processor.Processor, error)
 	mustEmbedUnimplementedSchedulingServer()
 }
 
@@ -57,7 +57,7 @@ type SchedulingServer interface {
 type UnimplementedSchedulingServer struct {
 }
 
-func (UnimplementedSchedulingServer) RegisterProcessor(context.Context, *processor.Processor) (*processor.Processor, error) {
+func (UnimplementedSchedulingServer) RegisterProcessor(context.Context, *ProcessorRegistration) (*processor.Processor, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterProcessor not implemented")
 }
 func (UnimplementedSchedulingServer) mustEmbedUnimplementedSchedulingServer() {}
@@ -74,7 +74,7 @@ func RegisterSchedulingServer(s grpc.ServiceRegistrar, srv SchedulingServer) {
 }
 
 func _Scheduling_RegisterProcessor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(processor.Processor)
+	in := new(ProcessorRegistration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ func _Scheduling_RegisterProcessor_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/zorro.Scheduling/RegisterProcessor",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulingServer).RegisterProcessor(ctx, req.(*processor.Processor))
+		return srv.(SchedulingServer).RegisterProcessor(ctx, req.(*ProcessorRegistration))
 	}
 	return interceptor(ctx, in, info, handler)
 }

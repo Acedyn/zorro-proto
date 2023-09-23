@@ -3,7 +3,6 @@ syntax = "proto3";
 package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/scheduling";
 
-import "zorroprotos/tools/command.proto";
 import "zorroprotos/processor/processor.proto";
 
 // Parameters for processor registration

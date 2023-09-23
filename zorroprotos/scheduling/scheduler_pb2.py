@@ -11,11 +11,10 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
-from zorroprotos.tools import command_pb2 as zorroprotos_dot_tools_dot_command__pb2
 from zorroprotos.processor import processor_pb2 as zorroprotos_dot_processor_dot_processor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&zorroprotos/scheduling/scheduler.proto\x12\x05zorro\x1a\x1fzorroprotos/tools/command.proto\x1a%zorroprotos/processor/processor.proto\"\x9e\x01\n\x16processorCommunication\x12+\n\x0e\x63ommand_update\x18\x01 \x01(\x0b\x32\x0e.zorro.CommandH\x00\x88\x01\x01\x12/\n\x10processor_update\x18\x02 \x01(\x0b\x32\x10.zorro.ProcessorH\x01\x88\x01\x01\x42\x11\n\x0f_command_updateB\x13\n\x11_processor_update2E\n\nScheduling\x12\x37\n\x11RegisterProcessor\x12\x10.zorro.Processor\x1a\x10.zorro.ProcessorB6Z4github.com/Acedyn/zorro-proto/zorroprotos/schedulingb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&zorroprotos/scheduling/scheduler.proto\x12\x05zorro\x1a%zorroprotos/processor/processor.proto\"J\n\x15ProcessorRegistration\x12#\n\tprocessor\x18\x01 \x01(\x0b\x32\x10.zorro.Processor\x12\x0c\n\x04host\x18\x02 \x01(\t2Q\n\nScheduling\x12\x43\n\x11RegisterProcessor\x12\x1c.zorro.ProcessorRegistration\x1a\x10.zorro.ProcessorB6Z4github.com/Acedyn/zorro-proto/zorroprotos/schedulingb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -24,8 +23,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z4github.com/Acedyn/zorro-proto/zorroprotos/scheduling'
-  _globals['_PROCESSORCOMMUNICATION']._serialized_start=122
-  _globals['_PROCESSORCOMMUNICATION']._serialized_end=280
-  _globals['_SCHEDULING']._serialized_start=282
-  _globals['_SCHEDULING']._serialized_end=351
+  _globals['_PROCESSORREGISTRATION']._serialized_start=88
+  _globals['_PROCESSORREGISTRATION']._serialized_end=162
+  _globals['_SCHEDULING']._serialized_start=164
+  _globals['_SCHEDULING']._serialized_end=245
 # @@protoc_insertion_point(module_scope)
