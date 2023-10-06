@@ -4,7 +4,7 @@ package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/tools";
 
 import "zorroprotos/tools/tool.proto";
-import "zorroprotos/processor/processor_query.proto";
+import "zorroprotos/scheduling/processor_query.proto";
 
 // A command is a task that will be sent to a processor to be executed.
 message Command {

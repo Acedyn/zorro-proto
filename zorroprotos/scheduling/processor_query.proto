@@ -1,7 +1,9 @@
 syntax = "proto3";
 
 package zorro;
-option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/processor";
+option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/scheduling";
+
+import "zorroprotos/context/context.proto";
 
 // Filters used to select a processor from a processor pool
 message ProcessorQuery {
@@ -13,4 +15,6 @@ message ProcessorQuery {
   optional string id = 4;
   // Match the processor by metadata or used as argument to start new processor
   map<string, string> metadata = 5;
+  // Match the context
+  Context context = 6;
 }
