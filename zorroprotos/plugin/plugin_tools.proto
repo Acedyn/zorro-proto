@@ -3,23 +3,16 @@ syntax = "proto3";
 package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/plugin";
 
-// Specify where to look for commands of a category
-message CommandsDeclaration {
-  string path = 1;
-  string category = 2;
-  string processor = 3;
-}
-
 // Specify where to look for tools of a category
-message GenericToolsDeclaration {
+message ToolsDeclaration {
   string path = 1;
   string category = 2;
 }
 
 // Where to look for tool declarations
 message PluginTools {
-  repeated CommandsDeclaration commands = 1;
-  repeated GenericToolsDeclaration actions = 2;
-  repeated GenericToolsDeclaration hooks = 3;
-  repeated GenericToolsDeclaration widgets = 4;
+  repeated ToolsDeclaration commands = 1;
+  repeated ToolsDeclaration actions = 2;
+  repeated ToolsDeclaration hooks = 3;
+  repeated ToolsDeclaration widgets = 4;
 }
