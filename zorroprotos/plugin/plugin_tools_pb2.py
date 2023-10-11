@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%zorroprotos/plugin/plugin_tools.proto\x12\x05zorro\"P\n\x0bPluginTools\x12\x10\n\x08\x63ommands\x18\x01 \x03(\t\x12\x0f\n\x07\x61\x63tions\x18\x02 \x03(\t\x12\r\n\x05hooks\x18\x03 \x03(\t\x12\x0f\n\x07widgets\x18\x04 \x03(\tB2Z0github.com/Acedyn/zorro-proto/zorroprotos/pluginb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%zorroprotos/plugin/plugin_tools.proto\x12\x05zorro\"I\n\x13\x43ommandsDeclaration\x12\r\n\x05paths\x18\x01 \x03(\t\x12\x10\n\x08\x63\x61tegory\x18\x02 \x01(\t\x12\x11\n\tprocessor\x18\x03 \x01(\t\":\n\x17GenericToolsDeclaration\x12\r\n\x05paths\x18\x01 \x03(\t\x12\x10\n\x08\x63\x61tegory\x18\x02 \x01(\t\"\xcc\x01\n\x0bPluginTools\x12,\n\x08\x63ommands\x18\x01 \x03(\x0b\x32\x1a.zorro.CommandsDeclaration\x12/\n\x07\x61\x63tions\x18\x02 \x03(\x0b\x32\x1e.zorro.GenericToolsDeclaration\x12-\n\x05hooks\x18\x03 \x03(\x0b\x32\x1e.zorro.GenericToolsDeclaration\x12/\n\x07widgets\x18\x04 \x03(\x0b\x32\x1e.zorro.GenericToolsDeclarationB2Z0github.com/Acedyn/zorro-proto/zorroprotos/pluginb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,6 +22,10 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z0github.com/Acedyn/zorro-proto/zorroprotos/plugin'
-  _globals['_PLUGINTOOLS']._serialized_start=48
-  _globals['_PLUGINTOOLS']._serialized_end=128
+  _globals['_COMMANDSDECLARATION']._serialized_start=48
+  _globals['_COMMANDSDECLARATION']._serialized_end=121
+  _globals['_GENERICTOOLSDECLARATION']._serialized_start=123
+  _globals['_GENERICTOOLSDECLARATION']._serialized_end=181
+  _globals['_PLUGINTOOLS']._serialized_start=184
+  _globals['_PLUGINTOOLS']._serialized_end=388
 # @@protoc_insertion_point(module_scope)
