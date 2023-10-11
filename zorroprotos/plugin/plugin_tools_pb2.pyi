@@ -5,23 +5,13 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class CommandsDeclaration(_message.Message):
-    __slots__ = ["paths", "category", "processor"]
-    PATHS_FIELD_NUMBER: _ClassVar[int]
+class ToolsDeclaration(_message.Message):
+    __slots__ = ["path", "category"]
+    PATH_FIELD_NUMBER: _ClassVar[int]
     CATEGORY_FIELD_NUMBER: _ClassVar[int]
-    PROCESSOR_FIELD_NUMBER: _ClassVar[int]
-    paths: _containers.RepeatedScalarFieldContainer[str]
+    path: str
     category: str
-    processor: str
-    def __init__(self, paths: _Optional[_Iterable[str]] = ..., category: _Optional[str] = ..., processor: _Optional[str] = ...) -> None: ...
-
-class GenericToolsDeclaration(_message.Message):
-    __slots__ = ["paths", "category"]
-    PATHS_FIELD_NUMBER: _ClassVar[int]
-    CATEGORY_FIELD_NUMBER: _ClassVar[int]
-    paths: _containers.RepeatedScalarFieldContainer[str]
-    category: str
-    def __init__(self, paths: _Optional[_Iterable[str]] = ..., category: _Optional[str] = ...) -> None: ...
+    def __init__(self, path: _Optional[str] = ..., category: _Optional[str] = ...) -> None: ...
 
 class PluginTools(_message.Message):
     __slots__ = ["commands", "actions", "hooks", "widgets"]
@@ -29,8 +19,8 @@ class PluginTools(_message.Message):
     ACTIONS_FIELD_NUMBER: _ClassVar[int]
     HOOKS_FIELD_NUMBER: _ClassVar[int]
     WIDGETS_FIELD_NUMBER: _ClassVar[int]
-    commands: _containers.RepeatedCompositeFieldContainer[CommandsDeclaration]
-    actions: _containers.RepeatedCompositeFieldContainer[GenericToolsDeclaration]
-    hooks: _containers.RepeatedCompositeFieldContainer[GenericToolsDeclaration]
-    widgets: _containers.RepeatedCompositeFieldContainer[GenericToolsDeclaration]
-    def __init__(self, commands: _Optional[_Iterable[_Union[CommandsDeclaration, _Mapping]]] = ..., actions: _Optional[_Iterable[_Union[GenericToolsDeclaration, _Mapping]]] = ..., hooks: _Optional[_Iterable[_Union[GenericToolsDeclaration, _Mapping]]] = ..., widgets: _Optional[_Iterable[_Union[GenericToolsDeclaration, _Mapping]]] = ...) -> None: ...
+    commands: _containers.RepeatedCompositeFieldContainer[ToolsDeclaration]
+    actions: _containers.RepeatedCompositeFieldContainer[ToolsDeclaration]
+    hooks: _containers.RepeatedCompositeFieldContainer[ToolsDeclaration]
+    widgets: _containers.RepeatedCompositeFieldContainer[ToolsDeclaration]
+    def __init__(self, commands: _Optional[_Iterable[_Union[ToolsDeclaration, _Mapping]]] = ..., actions: _Optional[_Iterable[_Union[ToolsDeclaration, _Mapping]]] = ..., hooks: _Optional[_Iterable[_Union[ToolsDeclaration, _Mapping]]] = ..., widgets: _Optional[_Iterable[_Union[ToolsDeclaration, _Mapping]]] = ...) -> None: ...
