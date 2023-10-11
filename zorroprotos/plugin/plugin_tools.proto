@@ -5,14 +5,14 @@ option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/plugin";
 
 // Specify where to look for commands of a category
 message CommandsDeclaration {
-  repeated string paths = 1;
+  string path = 1;
   string category = 2;
   string processor = 3;
 }
 
 // Specify where to look for tools of a category
 message GenericToolsDeclaration {
-  repeated string paths = 1;
+  string path = 1;
   string category = 2;
 }
 
