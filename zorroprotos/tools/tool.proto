@@ -44,7 +44,7 @@ message ToolBase {
   // The tooltip is only for the user
   optional string tooltip = 8;
   // Logs can be heavy, only the last ones are usually sent
-  map<int32, string> logs = 9;
+  map<uint64, string> logs = 9;
 }
 
 // An abstract tool representation
