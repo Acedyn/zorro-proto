@@ -7,7 +7,9 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Context(_message.Message):
-    __slots__ = ["plugins"]
+    __slots__ = ["id", "plugins"]
+    ID_FIELD_NUMBER: _ClassVar[int]
     PLUGINS_FIELD_NUMBER: _ClassVar[int]
+    id: str
     plugins: _containers.RepeatedCompositeFieldContainer[_plugin_pb2.Plugin]
-    def __init__(self, plugins: _Optional[_Iterable[_Union[_plugin_pb2.Plugin, _Mapping]]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., plugins: _Optional[_Iterable[_Union[_plugin_pb2.Plugin, _Mapping]]] = ...) -> None: ...

@@ -7,6 +7,8 @@ import "zorroprotos/plugin/plugin.proto";
 
 // Contexts represent the users's selection and all operations depends on it
 message Context {
+  // The Id helps differentiate different contexts
+  string id = 1;
   // List all the available plugins in the current context
-  repeated Plugin plugins = 1;
+  repeated Plugin plugins = 2;
 }
