@@ -3,23 +3,16 @@ syntax = "proto3";
 package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/tools";
 
-// Human readable data for a socket's entry
-message SocketEntry {
-  // Id representing the expected datatype
-  string kind = 1;
-  // The readable value stored in json
-  bytes json = 2;
-}
-
 // A socket acts as a payload for the input/output between two tools
 message Socket {
-  // Socket can either store their own data or link the data of an other socket
-  string link = 1;
-  // The raw data is a raw protobuf that must be unmarshalled
+  // Id representing the expected datatype
+  string kind = 1;
+  // The raw data is a raw protobuf that output from the command
   bytes raw = 2;
-  // The descriptor to use to unmarshall the raw data
-  string descriptor = 3;
-  // Humain readable version of the socket separated into entries
-  map<string, SocketEntry> entries = 4;
+  // The human readable value in json
+  bytes json = 3;
+  // The descriptor full name used to unmarshall the raw data
+  string descriptor = 4;
+  // Nested values can be linked individually
+  map<string, Socket> entries = 5;
 }
-
