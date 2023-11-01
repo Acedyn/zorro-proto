@@ -27,7 +27,7 @@ message Processor {
   ProcessorStatus status = 9;
   // Extra data used mainly for filters
   map<string, string> metadata = 10;
-  // Used to list the output logs
-  map<int32, string> stdout = 11;
-  map<int32, string> stderr = 12;
+  // Used to list the output logs by timestamps
+  map<int64, string> stdout = 11;
+  map<int64, string> stderr = 12;
 }
