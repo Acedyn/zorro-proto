@@ -34,21 +34,7 @@ ERROR: ToolStatus
 INVALID: ToolStatus
 
 class ToolBase(_message.Message):
-    __slots__ = ["id", "name", "type", "label", "status", "inputs", "outputs", "tooltip", "logs"]
-    class InputsEntry(_message.Message):
-        __slots__ = ["key", "value"]
-        KEY_FIELD_NUMBER: _ClassVar[int]
-        VALUE_FIELD_NUMBER: _ClassVar[int]
-        key: str
-        value: _socket_pb2.Socket
-        def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_socket_pb2.Socket, _Mapping]] = ...) -> None: ...
-    class OutputsEntry(_message.Message):
-        __slots__ = ["key", "value"]
-        KEY_FIELD_NUMBER: _ClassVar[int]
-        VALUE_FIELD_NUMBER: _ClassVar[int]
-        key: str
-        value: _socket_pb2.Socket
-        def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[_socket_pb2.Socket, _Mapping]] = ...) -> None: ...
+    __slots__ = ["id", "name", "type", "label", "status", "input", "output", "tooltip", "logs"]
     class LogsEntry(_message.Message):
         __slots__ = ["key", "value"]
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -61,8 +47,8 @@ class ToolBase(_message.Message):
     TYPE_FIELD_NUMBER: _ClassVar[int]
     LABEL_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
-    INPUTS_FIELD_NUMBER: _ClassVar[int]
-    OUTPUTS_FIELD_NUMBER: _ClassVar[int]
+    INPUT_FIELD_NUMBER: _ClassVar[int]
+    OUTPUT_FIELD_NUMBER: _ClassVar[int]
     TOOLTIP_FIELD_NUMBER: _ClassVar[int]
     LOGS_FIELD_NUMBER: _ClassVar[int]
     id: str
@@ -70,11 +56,11 @@ class ToolBase(_message.Message):
     type: ToolType
     label: str
     status: ToolStatus
-    inputs: _containers.MessageMap[str, _socket_pb2.Socket]
-    outputs: _containers.MessageMap[str, _socket_pb2.Socket]
+    input: _socket_pb2.Socket
+    output: _socket_pb2.Socket
     tooltip: str
     logs: _containers.ScalarMap[int, str]
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[_Union[ToolType, str]] = ..., label: _Optional[str] = ..., status: _Optional[_Union[ToolStatus, str]] = ..., inputs: _Optional[_Mapping[str, _socket_pb2.Socket]] = ..., outputs: _Optional[_Mapping[str, _socket_pb2.Socket]] = ..., tooltip: _Optional[str] = ..., logs: _Optional[_Mapping[int, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[_Union[ToolType, str]] = ..., label: _Optional[str] = ..., status: _Optional[_Union[ToolStatus, str]] = ..., input: _Optional[_Union[_socket_pb2.Socket, _Mapping]] = ..., output: _Optional[_Union[_socket_pb2.Socket, _Mapping]] = ..., tooltip: _Optional[str] = ..., logs: _Optional[_Mapping[int, str]] = ...) -> None: ...
 
 class Tool(_message.Message):
     __slots__ = ["base"]

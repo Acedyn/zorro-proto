@@ -39,8 +39,8 @@ message ToolBase {
   // The status is only used for user feedback
   optional ToolStatus status = 5;
   // Inputs and outputs
-  map<string, Socket> inputs = 6;
-  map<string, Socket> outputs = 7;
+  optional Socket input = 6;
+  optional Socket output = 7;
   // The tooltip is only for the user
   optional string tooltip = 8;
   // Logs can be heavy, only the last ones are usually sent
