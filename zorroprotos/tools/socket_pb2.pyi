@@ -22,10 +22,10 @@ class Socket(_message.Message):
     DESCRIPTOR_FIELD_NUMBER: _ClassVar[int]
     FIELDS_FIELD_NUMBER: _ClassVar[int]
     kind: str
-    wtyp: str
+    wtyp: int
     link: str
     raw: bytes
     json: bytes
     descriptor: str
     fields: _containers.MessageMap[str, Socket]
-    def __init__(self, kind: _Optional[str] = ..., wtyp: _Optional[str] = ..., link: _Optional[str] = ..., raw: _Optional[bytes] = ..., json: _Optional[bytes] = ..., descriptor: _Optional[str] = ..., fields: _Optional[_Mapping[str, Socket]] = ...) -> None: ...
+    def __init__(self, kind: _Optional[str] = ..., wtyp: _Optional[int] = ..., link: _Optional[str] = ..., raw: _Optional[bytes] = ..., json: _Optional[bytes] = ..., descriptor: _Optional[str] = ..., fields: _Optional[_Mapping[str, Socket]] = ...) -> None: ...
