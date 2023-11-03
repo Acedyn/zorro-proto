@@ -8,7 +8,7 @@ message Socket {
   // Human representation of the expected datatype
   string kind = 1;
   // The wire type is the category of datatype used for unmarshalling
-  string wtyp = 2;
+  int wtyp = 2;
   // The value can take two forms
   oneof value {
     // A socket can reference an other
