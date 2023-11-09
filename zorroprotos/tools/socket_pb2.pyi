@@ -6,7 +6,7 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Socket(_message.Message):
-    __slots__ = ["kind", "wtyp", "link", "raw", "json", "descriptor", "fields"]
+    __slots__ = ["kind", "link", "raw", "json", "fields"]
     class FieldsEntry(_message.Message):
         __slots__ = ["key", "value"]
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -15,17 +15,13 @@ class Socket(_message.Message):
         value: Socket
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[Socket, _Mapping]] = ...) -> None: ...
     KIND_FIELD_NUMBER: _ClassVar[int]
-    WTYP_FIELD_NUMBER: _ClassVar[int]
     LINK_FIELD_NUMBER: _ClassVar[int]
     RAW_FIELD_NUMBER: _ClassVar[int]
     JSON_FIELD_NUMBER: _ClassVar[int]
-    DESCRIPTOR_FIELD_NUMBER: _ClassVar[int]
     FIELDS_FIELD_NUMBER: _ClassVar[int]
     kind: str
-    wtyp: int
     link: str
     raw: bytes
     json: bytes
-    descriptor: str
     fields: _containers.MessageMap[str, Socket]
-    def __init__(self, kind: _Optional[str] = ..., wtyp: _Optional[int] = ..., link: _Optional[str] = ..., raw: _Optional[bytes] = ..., json: _Optional[bytes] = ..., descriptor: _Optional[str] = ..., fields: _Optional[_Mapping[str, Socket]] = ...) -> None: ...
+    def __init__(self, kind: _Optional[str] = ..., link: _Optional[str] = ..., raw: _Optional[bytes] = ..., json: _Optional[bytes] = ..., fields: _Optional[_Mapping[str, Socket]] = ...) -> None: ...

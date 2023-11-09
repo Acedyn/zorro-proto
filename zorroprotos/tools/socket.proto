@@ -7,19 +7,15 @@ option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/tools";
 message Socket {
   // Human representation of the expected datatype
   string kind = 1;
-  // The wire type is the category of datatype used for unmarshalling
-  int32 wtyp = 2;
   // The value can take two forms
   oneof value {
     // A socket can reference an other
-    string link = 3;
+    string link = 2;
     // The raw data is a raw value that output from the command
-    bytes raw = 4;
+    bytes raw = 3;
   }
   // The human readable value in json
-  bytes json = 5;
-  // The descriptor full name used to unmarshall the raw data
-  string descriptor = 6;
+  bytes json = 4;
   // Nested values can be linked or set individually
-  map<string, Socket> fields = 7;
+  map<string, Socket> fields = 5;
 }
