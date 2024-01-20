@@ -36,3 +36,18 @@ python -m pip install grpcio-tools
 ```bash
 python -m grpc_tools.protoc -I. --python_out=. --pyi_out=. --grpc_python_out=. ./**/*.proto
 ```
+
+
+### Typescript
+
+- Install the typescript protoc generator
+
+```bash
+npm install ts-proto -g
+```
+
+- Generate the typescript code
+
+```bash
+protoc --plugin=protoc-gen-ts_proto.cmd --ts_proto_out=. .\zorroprotos\tools\*.proto
+```
