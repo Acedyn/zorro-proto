@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package zorro;
+option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/config";
+
+// Config related to the network preferences
+message NetworkConfig {
+  int32 GRPC_port = 1;
+  string GRPC_host = 2;
+}
+

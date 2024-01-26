@@ -1,5 +1,6 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { NetworkConfig } from "./network_config";
 import { PluginConfig } from "./plugin_config";
 import { UserConfig } from "./user_config";
 
@@ -9,10 +10,11 @@ export const protobufPackage = "zorro";
 export interface Config {
   userPreferences: UserConfig | undefined;
   pluginConfig: PluginConfig | undefined;
+  networkConfig: NetworkConfig | undefined;
 }
 
 function createBaseConfig(): Config {
-  return { userPreferences: undefined, pluginConfig: undefined };
+  return { userPreferences: undefined, pluginConfig: undefined, networkConfig: undefined };
 }
 
 export const Config = {
@@ -22,6 +24,9 @@ export const Config = {
     }
     if (message.pluginConfig !== undefined) {
       PluginConfig.encode(message.pluginConfig, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.networkConfig !== undefined) {
+      NetworkConfig.encode(message.networkConfig, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -47,6 +52,13 @@ export const Config = {
 
           message.pluginConfig = PluginConfig.decode(reader, reader.uint32());
           continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.networkConfig = NetworkConfig.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -60,6 +72,7 @@ export const Config = {
     return {
       userPreferences: isSet(object.userPreferences) ? UserConfig.fromJSON(object.userPreferences) : undefined,
       pluginConfig: isSet(object.pluginConfig) ? PluginConfig.fromJSON(object.pluginConfig) : undefined,
+      networkConfig: isSet(object.networkConfig) ? NetworkConfig.fromJSON(object.networkConfig) : undefined,
     };
   },
 
@@ -70,6 +83,9 @@ export const Config = {
     }
     if (message.pluginConfig !== undefined) {
       obj.pluginConfig = PluginConfig.toJSON(message.pluginConfig);
+    }
+    if (message.networkConfig !== undefined) {
+      obj.networkConfig = NetworkConfig.toJSON(message.networkConfig);
     }
     return obj;
   },
@@ -84,6 +100,9 @@ export const Config = {
       : undefined;
     message.pluginConfig = (object.pluginConfig !== undefined && object.pluginConfig !== null)
       ? PluginConfig.fromPartial(object.pluginConfig)
+      : undefined;
+    message.networkConfig = (object.networkConfig !== undefined && object.networkConfig !== null)
+      ? NetworkConfig.fromPartial(object.networkConfig)
       : undefined;
     return message;
   },
