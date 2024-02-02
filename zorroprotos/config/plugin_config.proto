@@ -8,5 +8,7 @@ message PluginConfig {
   // The list of plugins that will be required all the time
   repeated string default_require = 1;
   // List of plugin repository addresses
-  repeated string repos = 2;
+  repeated string repositories = 2;
+  // Maximum folder depth when looking for a plugin in a repository
+  int32 search_maximum_depht= 3;
 }

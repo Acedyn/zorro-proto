@@ -8,11 +8,13 @@ export interface PluginConfig {
   /** The list of plugins that will be required all the time */
   defaultRequire: string[];
   /** List of plugin repository addresses */
-  repos: string[];
+  repositories: string[];
+  /** Maximum folder depth when looking for a plugin in a repository */
+  searchMaximumDepht: number;
 }
 
 function createBasePluginConfig(): PluginConfig {
-  return { defaultRequire: [], repos: [] };
+  return { defaultRequire: [], repositories: [], searchMaximumDepht: 0 };
 }
 
 export const PluginConfig = {
@@ -20,8 +22,11 @@ export const PluginConfig = {
     for (const v of message.defaultRequire) {
       writer.uint32(10).string(v!);
     }
-    for (const v of message.repos) {
+    for (const v of message.repositories) {
       writer.uint32(18).string(v!);
+    }
+    if (message.searchMaximumDepht !== 0) {
+      writer.uint32(24).int32(message.searchMaximumDepht);
     }
     return writer;
   },
@@ -45,7 +50,14 @@ export const PluginConfig = {
             break;
           }
 
-          message.repos.push(reader.string());
+          message.repositories.push(reader.string());
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.searchMaximumDepht = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -61,7 +73,10 @@ export const PluginConfig = {
       defaultRequire: globalThis.Array.isArray(object?.defaultRequire)
         ? object.defaultRequire.map((e: any) => globalThis.String(e))
         : [],
-      repos: globalThis.Array.isArray(object?.repos) ? object.repos.map((e: any) => globalThis.String(e)) : [],
+      repositories: globalThis.Array.isArray(object?.repositories)
+        ? object.repositories.map((e: any) => globalThis.String(e))
+        : [],
+      searchMaximumDepht: isSet(object.searchMaximumDepht) ? globalThis.Number(object.searchMaximumDepht) : 0,
     };
   },
 
@@ -70,8 +85,11 @@ export const PluginConfig = {
     if (message.defaultRequire?.length) {
       obj.defaultRequire = message.defaultRequire;
     }
-    if (message.repos?.length) {
-      obj.repos = message.repos;
+    if (message.repositories?.length) {
+      obj.repositories = message.repositories;
+    }
+    if (message.searchMaximumDepht !== 0) {
+      obj.searchMaximumDepht = Math.round(message.searchMaximumDepht);
     }
     return obj;
   },
@@ -82,7 +100,8 @@ export const PluginConfig = {
   fromPartial<I extends Exact<DeepPartial<PluginConfig>, I>>(object: I): PluginConfig {
     const message = createBasePluginConfig();
     message.defaultRequire = object.defaultRequire?.map((e) => e) || [];
-    message.repos = object.repos?.map((e) => e) || [];
+    message.repositories = object.repositories?.map((e) => e) || [];
+    message.searchMaximumDepht = object.searchMaximumDepht ?? 0;
     return message;
   },
 };
@@ -98,3 +117,7 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}
