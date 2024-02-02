@@ -66,7 +66,12 @@ export interface FileSystemConfig {
 
 /** Config related to the user's preferences */
 export interface FileSystemsConfig {
-  fileSystems: FileSystemConfig[];
+  fileSystems: { [key: string]: FileSystemConfig };
+}
+
+export interface FileSystemsConfig_FileSystemsEntry {
+  key: string;
+  value: FileSystemConfig | undefined;
 }
 
 function createBaseOsFsConfig(): OsFsConfig {
@@ -321,14 +326,14 @@ export const FileSystemConfig = {
 };
 
 function createBaseFileSystemsConfig(): FileSystemsConfig {
-  return { fileSystems: [] };
+  return { fileSystems: {} };
 }
 
 export const FileSystemsConfig = {
   encode(message: FileSystemsConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.fileSystems) {
-      FileSystemConfig.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
+    Object.entries(message.fileSystems).forEach(([key, value]) => {
+      FileSystemsConfig_FileSystemsEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
+    });
     return writer;
   },
 
@@ -344,7 +349,10 @@ export const FileSystemsConfig = {
             break;
           }
 
-          message.fileSystems.push(FileSystemConfig.decode(reader, reader.uint32()));
+          const entry1 = FileSystemsConfig_FileSystemsEntry.decode(reader, reader.uint32());
+          if (entry1.value !== undefined) {
+            message.fileSystems[entry1.key] = entry1.value;
+          }
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -357,16 +365,25 @@ export const FileSystemsConfig = {
 
   fromJSON(object: any): FileSystemsConfig {
     return {
-      fileSystems: globalThis.Array.isArray(object?.fileSystems)
-        ? object.fileSystems.map((e: any) => FileSystemConfig.fromJSON(e))
-        : [],
+      fileSystems: isObject(object.fileSystems)
+        ? Object.entries(object.fileSystems).reduce<{ [key: string]: FileSystemConfig }>((acc, [key, value]) => {
+          acc[key] = FileSystemConfig.fromJSON(value);
+          return acc;
+        }, {})
+        : {},
     };
   },
 
   toJSON(message: FileSystemsConfig): unknown {
     const obj: any = {};
-    if (message.fileSystems?.length) {
-      obj.fileSystems = message.fileSystems.map((e) => FileSystemConfig.toJSON(e));
+    if (message.fileSystems) {
+      const entries = Object.entries(message.fileSystems);
+      if (entries.length > 0) {
+        obj.fileSystems = {};
+        entries.forEach(([k, v]) => {
+          obj.fileSystems[k] = FileSystemConfig.toJSON(v);
+        });
+      }
     }
     return obj;
   },
@@ -376,7 +393,95 @@ export const FileSystemsConfig = {
   },
   fromPartial<I extends Exact<DeepPartial<FileSystemsConfig>, I>>(object: I): FileSystemsConfig {
     const message = createBaseFileSystemsConfig();
-    message.fileSystems = object.fileSystems?.map((e) => FileSystemConfig.fromPartial(e)) || [];
+    message.fileSystems = Object.entries(object.fileSystems ?? {}).reduce<{ [key: string]: FileSystemConfig }>(
+      (acc, [key, value]) => {
+        if (value !== undefined) {
+          acc[key] = FileSystemConfig.fromPartial(value);
+        }
+        return acc;
+      },
+      {},
+    );
+    return message;
+  },
+};
+
+function createBaseFileSystemsConfig_FileSystemsEntry(): FileSystemsConfig_FileSystemsEntry {
+  return { key: "", value: undefined };
+}
+
+export const FileSystemsConfig_FileSystemsEntry = {
+  encode(message: FileSystemsConfig_FileSystemsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== undefined) {
+      FileSystemConfig.encode(message.value, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): FileSystemsConfig_FileSystemsEntry {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFileSystemsConfig_FileSystemsEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.key = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.value = FileSystemConfig.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FileSystemsConfig_FileSystemsEntry {
+    return {
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? FileSystemConfig.fromJSON(object.value) : undefined,
+    };
+  },
+
+  toJSON(message: FileSystemsConfig_FileSystemsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = FileSystemConfig.toJSON(message.value);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FileSystemsConfig_FileSystemsEntry>, I>>(
+    base?: I,
+  ): FileSystemsConfig_FileSystemsEntry {
+    return FileSystemsConfig_FileSystemsEntry.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FileSystemsConfig_FileSystemsEntry>, I>>(
+    object: I,
+  ): FileSystemsConfig_FileSystemsEntry {
+    const message = createBaseFileSystemsConfig_FileSystemsEntry();
+    message.key = object.key ?? "";
+    message.value = (object.value !== undefined && object.value !== null)
+      ? FileSystemConfig.fromPartial(object.value)
+      : undefined;
     return message;
   },
 };
@@ -392,6 +497,10 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function isObject(value: any): boolean {
+  return typeof value === "object" && value !== null;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

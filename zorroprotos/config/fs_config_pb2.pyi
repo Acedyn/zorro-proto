@@ -2,7 +2,7 @@ from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -43,6 +43,13 @@ class FileSystemConfig(_message.Message):
 
 class FileSystemsConfig(_message.Message):
     __slots__ = ["file_systems"]
+    class FileSystemsEntry(_message.Message):
+        __slots__ = ["key", "value"]
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: FileSystemConfig
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[FileSystemConfig, _Mapping]] = ...) -> None: ...
     FILE_SYSTEMS_FIELD_NUMBER: _ClassVar[int]
-    file_systems: _containers.RepeatedCompositeFieldContainer[FileSystemConfig]
-    def __init__(self, file_systems: _Optional[_Iterable[_Union[FileSystemConfig, _Mapping]]] = ...) -> None: ...
+    file_systems: _containers.MessageMap[str, FileSystemConfig]
+    def __init__(self, file_systems: _Optional[_Mapping[str, FileSystemConfig]] = ...) -> None: ...

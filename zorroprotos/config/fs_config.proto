@@ -37,5 +37,5 @@ message FileSystemConfig {
 
 // Config related to the user's preferences
 message FileSystemsConfig {
-  repeated FileSystemConfig file_systems = 1;
+  map<string, FileSystemConfig> file_systems = 1;
 }
