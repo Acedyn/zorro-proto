@@ -86,17 +86,17 @@ export const ProcessorRegistration = {
   },
 };
 
-export interface Scheduling {
+export interface SubprocessScheduling {
   /** For processors to start running their commands */
   RegisterProcessor(request: ProcessorRegistration): Promise<Processor>;
 }
 
-export const SchedulingServiceName = "zorro.Scheduling";
-export class SchedulingClientImpl implements Scheduling {
+export const SubprocessSchedulingServiceName = "zorro.SubprocessScheduling";
+export class SubprocessSchedulingClientImpl implements SubprocessScheduling {
   private readonly rpc: Rpc;
   private readonly service: string;
   constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || SchedulingServiceName;
+    this.service = opts?.service || SubprocessSchedulingServiceName;
     this.rpc = rpc;
     this.RegisterProcessor = this.RegisterProcessor.bind(this);
   }

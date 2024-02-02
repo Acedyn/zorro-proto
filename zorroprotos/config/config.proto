@@ -13,5 +13,5 @@ message Config {
   UserConfig user_preferences = 1;
   PluginConfig plugin_config = 2;
   NetworkConfig network_config = 3;
-  FileSystemsConfig file_systems_config = 3;
+  FileSystemsConfig file_systems_config = 4;
 }

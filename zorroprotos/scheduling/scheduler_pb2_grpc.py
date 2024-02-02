@@ -6,7 +6,7 @@ from zorroprotos.processor import processor_pb2 as zorroprotos_dot_processor_dot
 from zorroprotos.scheduling import scheduler_pb2 as zorroprotos_dot_scheduling_dot_scheduler__pb2
 
 
-class SchedulingStub(object):
+class SubprocessSchedulingStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -16,13 +16,13 @@ class SchedulingStub(object):
             channel: A grpc.Channel.
         """
         self.RegisterProcessor = channel.unary_unary(
-                '/zorro.Scheduling/RegisterProcessor',
+                '/zorro.SubprocessScheduling/RegisterProcessor',
                 request_serializer=zorroprotos_dot_scheduling_dot_scheduler__pb2.ProcessorRegistration.SerializeToString,
                 response_deserializer=zorroprotos_dot_processor_dot_processor__pb2.Processor.FromString,
                 )
 
 
-class SchedulingServicer(object):
+class SubprocessSchedulingServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def RegisterProcessor(self, request, context):
@@ -33,7 +33,7 @@ class SchedulingServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_SchedulingServicer_to_server(servicer, server):
+def add_SubprocessSchedulingServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'RegisterProcessor': grpc.unary_unary_rpc_method_handler(
                     servicer.RegisterProcessor,
@@ -42,12 +42,12 @@ def add_SchedulingServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'zorro.Scheduling', rpc_method_handlers)
+            'zorro.SubprocessScheduling', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class Scheduling(object):
+class SubprocessScheduling(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -61,7 +61,7 @@ class Scheduling(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/zorro.Scheduling/RegisterProcessor',
+        return grpc.experimental.unary_unary(request, target, '/zorro.SubprocessScheduling/RegisterProcessor',
             zorroprotos_dot_scheduling_dot_scheduler__pb2.ProcessorRegistration.SerializeToString,
             zorroprotos_dot_processor_dot_processor__pb2.Processor.FromString,
             options, channel_credentials,

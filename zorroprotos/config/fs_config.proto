@@ -17,7 +17,7 @@ message OsFsConfig {
 
 // Config for the indexed DB file system
 message IndexedDbFsConfig {
-  string name = 0;
+  string name = 1;
 }
 
 // Config for the in memory file system
@@ -27,15 +27,15 @@ message MemoryFsConfig {
 
 // Config for a selected file system
 message FileSystemConfig {
-  FileSystemType type = 0;
+  FileSystemType type = 1;
   oneof config {
-    OsFsConfig os = 1;
-    IndexedDbFsConfig indexedDb = 2;
-    MemoryFsConfig memory = 3;
+    OsFsConfig os = 2;
+    IndexedDbFsConfig indexedDb = 3;
+    MemoryFsConfig memory = 4;
   }
 }
 
 // Config related to the user's preferences
 message FileSystemsConfig {
-  repeated FileSystemConfig
+  repeated FileSystemConfig file_systems = 1;
 }

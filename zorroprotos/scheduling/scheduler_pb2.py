@@ -14,17 +14,16 @@ _sym_db = _symbol_database.Default()
 from zorroprotos.processor import processor_pb2 as zorroprotos_dot_processor_dot_processor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&zorroprotos/scheduling/scheduler.proto\x12\x05zorro\x1a%zorroprotos/processor/processor.proto\"J\n\x15ProcessorRegistration\x12#\n\tprocessor\x18\x01 \x01(\x0b\x32\x10.zorro.Processor\x12\x0c\n\x04host\x18\x02 \x01(\t2Q\n\nScheduling\x12\x43\n\x11RegisterProcessor\x12\x1c.zorro.ProcessorRegistration\x1a\x10.zorro.ProcessorB6Z4github.com/Acedyn/zorro-proto/zorroprotos/schedulingb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&zorroprotos/scheduling/scheduler.proto\x12\x05zorro\x1a%zorroprotos/processor/processor.proto\"J\n\x15ProcessorRegistration\x12#\n\tprocessor\x18\x01 \x01(\x0b\x32\x10.zorro.Processor\x12\x0c\n\x04host\x18\x02 \x01(\t2[\n\x14SubprocessScheduling\x12\x43\n\x11RegisterProcessor\x12\x1c.zorro.ProcessorRegistration\x1a\x10.zorro.ProcessorB6Z4github.com/Acedyn/zorro-proto/zorroprotos/schedulingb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'zorroprotos.scheduling.scheduler_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
-
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z4github.com/Acedyn/zorro-proto/zorroprotos/scheduling'
   _globals['_PROCESSORREGISTRATION']._serialized_start=88
   _globals['_PROCESSORREGISTRATION']._serialized_end=162
-  _globals['_SCHEDULING']._serialized_start=164
-  _globals['_SCHEDULING']._serialized_end=245
+  _globals['_SUBPROCESSSCHEDULING']._serialized_start=164
+  _globals['_SUBPROCESSSCHEDULING']._serialized_end=255
 # @@protoc_insertion_point(module_scope)
