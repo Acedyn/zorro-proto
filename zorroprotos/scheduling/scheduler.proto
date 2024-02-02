@@ -11,7 +11,7 @@ message ProcessorRegistration {
   string host = 2;
 }
 
-service Scheduling {
+service SubprocessScheduling {
   // For processors to start running their commands
   rpc RegisterProcessor(ProcessorRegistration) returns (Processor);
 }

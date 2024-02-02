@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package zorro;
+option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/config";
+
+// List all the available languages
+enum FileSystemType {
+  Os = 0;
+  IndexedDb = 1;
+  Memory = 2;
+}
+
+// Config for the OS file system
+message OsFsConfig {
+
+}
+
+// Config for the indexed DB file system
+message IndexedDbFsConfig {
+  string name = 0;
+}
+
+// Config for the in memory file system
+message MemoryFsConfig {
+
+}
+
+// Config for a selected file system
+message FileSystemConfig {
+  FileSystemType type = 0;
+  oneof config {
+    OsFsConfig os = 1;
+    IndexedDbFsConfig indexedDb = 2;
+    MemoryFsConfig memory = 3;
+  }
+}
+
+// Config related to the user's preferences
+message FileSystemsConfig {
+  repeated FileSystemConfig
+}
