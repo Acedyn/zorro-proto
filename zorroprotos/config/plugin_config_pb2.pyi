@@ -30,18 +30,18 @@ class MemoryFsConfig(_message.Message):
     def __init__(self) -> None: ...
 
 class RepositoryConfig(_message.Message):
-    __slots__ = ["fs_type", "os", "indexedDb", "memory", "path"]
-    FS_TYPE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["file_system_type", "os", "indexedDb", "memory", "path"]
+    FILE_SYSTEM_TYPE_FIELD_NUMBER: _ClassVar[int]
     OS_FIELD_NUMBER: _ClassVar[int]
     INDEXEDDB_FIELD_NUMBER: _ClassVar[int]
     MEMORY_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
-    fs_type: FileSystemType
+    file_system_type: FileSystemType
     os: OsFsConfig
     indexedDb: IndexedDbFsConfig
     memory: MemoryFsConfig
     path: str
-    def __init__(self, fs_type: _Optional[_Union[FileSystemType, str]] = ..., os: _Optional[_Union[OsFsConfig, _Mapping]] = ..., indexedDb: _Optional[_Union[IndexedDbFsConfig, _Mapping]] = ..., memory: _Optional[_Union[MemoryFsConfig, _Mapping]] = ..., path: _Optional[str] = ...) -> None: ...
+    def __init__(self, file_system_type: _Optional[_Union[FileSystemType, str]] = ..., os: _Optional[_Union[OsFsConfig, _Mapping]] = ..., indexedDb: _Optional[_Union[IndexedDbFsConfig, _Mapping]] = ..., memory: _Optional[_Union[MemoryFsConfig, _Mapping]] = ..., path: _Optional[str] = ...) -> None: ...
 
 class PluginConfig(_message.Message):
     __slots__ = ["default_require", "repositories", "search_maximum_depht"]

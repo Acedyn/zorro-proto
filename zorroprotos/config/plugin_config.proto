@@ -27,8 +27,8 @@ message MemoryFsConfig {
 
 // Config for a selected file system
 message RepositoryConfig {
-  FileSystemType fs_type = 1;
-  oneof fs_config {
+  FileSystemType file_system_type = 1;
+  oneof file_system_config {
     OsFsConfig os = 2;
     IndexedDbFsConfig indexedDb = 3;
     MemoryFsConfig memory = 4;
