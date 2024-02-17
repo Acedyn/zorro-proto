@@ -58,7 +58,7 @@ export interface MemoryFsConfig {
 
 /** Config for a selected file system */
 export interface RepositoryConfig {
-  type: FileSystemType;
+  fsType: FileSystemType;
   os?: OsFsConfig | undefined;
   indexedDb?: IndexedDbFsConfig | undefined;
   memory?: MemoryFsConfig | undefined;
@@ -219,13 +219,13 @@ export const MemoryFsConfig = {
 };
 
 function createBaseRepositoryConfig(): RepositoryConfig {
-  return { type: 0, os: undefined, indexedDb: undefined, memory: undefined, path: "" };
+  return { fsType: 0, os: undefined, indexedDb: undefined, memory: undefined, path: "" };
 }
 
 export const RepositoryConfig = {
   encode(message: RepositoryConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.type !== 0) {
-      writer.uint32(8).int32(message.type);
+    if (message.fsType !== 0) {
+      writer.uint32(8).int32(message.fsType);
     }
     if (message.os !== undefined) {
       OsFsConfig.encode(message.os, writer.uint32(18).fork()).ldelim();
@@ -254,7 +254,7 @@ export const RepositoryConfig = {
             break;
           }
 
-          message.type = reader.int32() as any;
+          message.fsType = reader.int32() as any;
           continue;
         case 2:
           if (tag !== 18) {
@@ -295,7 +295,7 @@ export const RepositoryConfig = {
 
   fromJSON(object: any): RepositoryConfig {
     return {
-      type: isSet(object.type) ? fileSystemTypeFromJSON(object.type) : 0,
+      fsType: isSet(object.fsType) ? fileSystemTypeFromJSON(object.fsType) : 0,
       os: isSet(object.os) ? OsFsConfig.fromJSON(object.os) : undefined,
       indexedDb: isSet(object.indexedDb) ? IndexedDbFsConfig.fromJSON(object.indexedDb) : undefined,
       memory: isSet(object.memory) ? MemoryFsConfig.fromJSON(object.memory) : undefined,
@@ -305,8 +305,8 @@ export const RepositoryConfig = {
 
   toJSON(message: RepositoryConfig): unknown {
     const obj: any = {};
-    if (message.type !== 0) {
-      obj.type = fileSystemTypeToJSON(message.type);
+    if (message.fsType !== 0) {
+      obj.fsType = fileSystemTypeToJSON(message.fsType);
     }
     if (message.os !== undefined) {
       obj.os = OsFsConfig.toJSON(message.os);
@@ -328,7 +328,7 @@ export const RepositoryConfig = {
   },
   fromPartial<I extends Exact<DeepPartial<RepositoryConfig>, I>>(object: I): RepositoryConfig {
     const message = createBaseRepositoryConfig();
-    message.type = object.type ?? 0;
+    message.fsType = object.fsType ?? 0;
     message.os = (object.os !== undefined && object.os !== null) ? OsFsConfig.fromPartial(object.os) : undefined;
     message.indexedDb = (object.indexedDb !== undefined && object.indexedDb !== null)
       ? IndexedDbFsConfig.fromPartial(object.indexedDb)
