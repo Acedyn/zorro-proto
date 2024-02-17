@@ -44,11 +44,11 @@ class RepositoryConfig(_message.Message):
     def __init__(self, type: _Optional[_Union[FileSystemType, str]] = ..., os: _Optional[_Union[OsFsConfig, _Mapping]] = ..., indexedDb: _Optional[_Union[IndexedDbFsConfig, _Mapping]] = ..., memory: _Optional[_Union[MemoryFsConfig, _Mapping]] = ..., path: _Optional[str] = ...) -> None: ...
 
 class PluginConfig(_message.Message):
-    __slots__ = ["default_require", "RepositoryConfig", "search_maximum_depht"]
+    __slots__ = ["default_require", "repositories", "search_maximum_depht"]
     DEFAULT_REQUIRE_FIELD_NUMBER: _ClassVar[int]
-    REPOSITORYCONFIG_FIELD_NUMBER: _ClassVar[int]
+    REPOSITORIES_FIELD_NUMBER: _ClassVar[int]
     SEARCH_MAXIMUM_DEPHT_FIELD_NUMBER: _ClassVar[int]
     default_require: _containers.RepeatedScalarFieldContainer[str]
-    RepositoryConfig: _containers.RepeatedScalarFieldContainer[str]
+    repositories: _containers.RepeatedCompositeFieldContainer[RepositoryConfig]
     search_maximum_depht: int
-    def __init__(self, default_require: _Optional[_Iterable[str]] = ..., RepositoryConfig: _Optional[_Iterable[str]] = ..., search_maximum_depht: _Optional[int] = ...) -> None: ...
+    def __init__(self, default_require: _Optional[_Iterable[str]] = ..., repositories: _Optional[_Iterable[_Union[RepositoryConfig, _Mapping]]] = ..., search_maximum_depht: _Optional[int] = ...) -> None: ...

@@ -70,7 +70,7 @@ export interface PluginConfig {
   /** The list of plugins that will be required all the time */
   defaultRequire: string[];
   /** List of plugin repository addresses */
-  RepositoryConfig: string[];
+  repositories: RepositoryConfig[];
   /** Maximum folder depth when looking for a plugin in a repository */
   searchMaximumDepht: number;
 }
@@ -342,7 +342,7 @@ export const RepositoryConfig = {
 };
 
 function createBasePluginConfig(): PluginConfig {
-  return { defaultRequire: [], RepositoryConfig: [], searchMaximumDepht: 0 };
+  return { defaultRequire: [], repositories: [], searchMaximumDepht: 0 };
 }
 
 export const PluginConfig = {
@@ -350,8 +350,8 @@ export const PluginConfig = {
     for (const v of message.defaultRequire) {
       writer.uint32(10).string(v!);
     }
-    for (const v of message.RepositoryConfig) {
-      writer.uint32(18).string(v!);
+    for (const v of message.repositories) {
+      RepositoryConfig.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.searchMaximumDepht !== 0) {
       writer.uint32(24).int32(message.searchMaximumDepht);
@@ -378,7 +378,7 @@ export const PluginConfig = {
             break;
           }
 
-          message.RepositoryConfig.push(reader.string());
+          message.repositories.push(RepositoryConfig.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 24) {
@@ -401,8 +401,8 @@ export const PluginConfig = {
       defaultRequire: globalThis.Array.isArray(object?.defaultRequire)
         ? object.defaultRequire.map((e: any) => globalThis.String(e))
         : [],
-      RepositoryConfig: globalThis.Array.isArray(object?.RepositoryConfig)
-        ? object.RepositoryConfig.map((e: any) => globalThis.String(e))
+      repositories: globalThis.Array.isArray(object?.repositories)
+        ? object.repositories.map((e: any) => RepositoryConfig.fromJSON(e))
         : [],
       searchMaximumDepht: isSet(object.searchMaximumDepht) ? globalThis.Number(object.searchMaximumDepht) : 0,
     };
@@ -413,8 +413,8 @@ export const PluginConfig = {
     if (message.defaultRequire?.length) {
       obj.defaultRequire = message.defaultRequire;
     }
-    if (message.RepositoryConfig?.length) {
-      obj.RepositoryConfig = message.RepositoryConfig;
+    if (message.repositories?.length) {
+      obj.repositories = message.repositories.map((e) => RepositoryConfig.toJSON(e));
     }
     if (message.searchMaximumDepht !== 0) {
       obj.searchMaximumDepht = Math.round(message.searchMaximumDepht);
@@ -428,7 +428,7 @@ export const PluginConfig = {
   fromPartial<I extends Exact<DeepPartial<PluginConfig>, I>>(object: I): PluginConfig {
     const message = createBasePluginConfig();
     message.defaultRequire = object.defaultRequire?.map((e) => e) || [];
-    message.RepositoryConfig = object.RepositoryConfig?.map((e) => e) || [];
+    message.repositories = object.repositories?.map((e) => RepositoryConfig.fromPartial(e)) || [];
     message.searchMaximumDepht = object.searchMaximumDepht ?? 0;
     return message;
   },
