@@ -45,6 +45,7 @@ export function fileSystemTypeToJSON(object: FileSystemType): string {
 
 /** Config for the OS file system */
 export interface OsFsConfig {
+  directory: string;
 }
 
 /** Config for the indexed DB file system */
@@ -62,7 +63,6 @@ export interface RepositoryConfig {
   os?: OsFsConfig | undefined;
   indexedDb?: IndexedDbFsConfig | undefined;
   memory?: MemoryFsConfig | undefined;
-  path: string;
 }
 
 /** Config related to the plugins */
@@ -76,11 +76,14 @@ export interface PluginConfig {
 }
 
 function createBaseOsFsConfig(): OsFsConfig {
-  return {};
+  return { directory: "" };
 }
 
 export const OsFsConfig = {
-  encode(_: OsFsConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OsFsConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.directory !== "") {
+      writer.uint32(10).string(message.directory);
+    }
     return writer;
   },
 
@@ -91,6 +94,13 @@ export const OsFsConfig = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.directory = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -100,20 +110,24 @@ export const OsFsConfig = {
     return message;
   },
 
-  fromJSON(_: any): OsFsConfig {
-    return {};
+  fromJSON(object: any): OsFsConfig {
+    return { directory: isSet(object.directory) ? globalThis.String(object.directory) : "" };
   },
 
-  toJSON(_: OsFsConfig): unknown {
+  toJSON(message: OsFsConfig): unknown {
     const obj: any = {};
+    if (message.directory !== "") {
+      obj.directory = message.directory;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<OsFsConfig>, I>>(base?: I): OsFsConfig {
     return OsFsConfig.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OsFsConfig>, I>>(_: I): OsFsConfig {
+  fromPartial<I extends Exact<DeepPartial<OsFsConfig>, I>>(object: I): OsFsConfig {
     const message = createBaseOsFsConfig();
+    message.directory = object.directory ?? "";
     return message;
   },
 };
@@ -219,7 +233,7 @@ export const MemoryFsConfig = {
 };
 
 function createBaseRepositoryConfig(): RepositoryConfig {
-  return { fileSystemType: 0, os: undefined, indexedDb: undefined, memory: undefined, path: "" };
+  return { fileSystemType: 0, os: undefined, indexedDb: undefined, memory: undefined };
 }
 
 export const RepositoryConfig = {
@@ -235,9 +249,6 @@ export const RepositoryConfig = {
     }
     if (message.memory !== undefined) {
       MemoryFsConfig.encode(message.memory, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.path !== "") {
-      writer.uint32(42).string(message.path);
     }
     return writer;
   },
@@ -277,13 +288,6 @@ export const RepositoryConfig = {
 
           message.memory = MemoryFsConfig.decode(reader, reader.uint32());
           continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.path = reader.string();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -299,7 +303,6 @@ export const RepositoryConfig = {
       os: isSet(object.os) ? OsFsConfig.fromJSON(object.os) : undefined,
       indexedDb: isSet(object.indexedDb) ? IndexedDbFsConfig.fromJSON(object.indexedDb) : undefined,
       memory: isSet(object.memory) ? MemoryFsConfig.fromJSON(object.memory) : undefined,
-      path: isSet(object.path) ? globalThis.String(object.path) : "",
     };
   },
 
@@ -317,9 +320,6 @@ export const RepositoryConfig = {
     if (message.memory !== undefined) {
       obj.memory = MemoryFsConfig.toJSON(message.memory);
     }
-    if (message.path !== "") {
-      obj.path = message.path;
-    }
     return obj;
   },
 
@@ -336,7 +336,6 @@ export const RepositoryConfig = {
     message.memory = (object.memory !== undefined && object.memory !== null)
       ? MemoryFsConfig.fromPartial(object.memory)
       : undefined;
-    message.path = object.path ?? "";
     return message;
   },
 };
