@@ -20,6 +20,294 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// List all the available file systems
+type FileSystemType int32
+
+const (
+	FileSystemType_Os        FileSystemType = 0
+	FileSystemType_IndexedDb FileSystemType = 1
+	FileSystemType_Memory    FileSystemType = 2
+)
+
+// Enum value maps for FileSystemType.
+var (
+	FileSystemType_name = map[int32]string{
+		0: "Os",
+		1: "IndexedDb",
+		2: "Memory",
+	}
+	FileSystemType_value = map[string]int32{
+		"Os":        0,
+		"IndexedDb": 1,
+		"Memory":    2,
+	}
+)
+
+func (x FileSystemType) Enum() *FileSystemType {
+	p := new(FileSystemType)
+	*p = x
+	return p
+}
+
+func (x FileSystemType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (FileSystemType) Descriptor() protoreflect.EnumDescriptor {
+	return file_zorroprotos_config_plugin_config_proto_enumTypes[0].Descriptor()
+}
+
+func (FileSystemType) Type() protoreflect.EnumType {
+	return &file_zorroprotos_config_plugin_config_proto_enumTypes[0]
+}
+
+func (x FileSystemType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use FileSystemType.Descriptor instead.
+func (FileSystemType) EnumDescriptor() ([]byte, []int) {
+	return file_zorroprotos_config_plugin_config_proto_rawDescGZIP(), []int{0}
+}
+
+// Config for the OS file system
+type OsFsConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *OsFsConfig) Reset() {
+	*x = OsFsConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OsFsConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OsFsConfig) ProtoMessage() {}
+
+func (x *OsFsConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OsFsConfig.ProtoReflect.Descriptor instead.
+func (*OsFsConfig) Descriptor() ([]byte, []int) {
+	return file_zorroprotos_config_plugin_config_proto_rawDescGZIP(), []int{0}
+}
+
+// Config for the indexed DB file system
+type IndexedDbFsConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+}
+
+func (x *IndexedDbFsConfig) Reset() {
+	*x = IndexedDbFsConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IndexedDbFsConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IndexedDbFsConfig) ProtoMessage() {}
+
+func (x *IndexedDbFsConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IndexedDbFsConfig.ProtoReflect.Descriptor instead.
+func (*IndexedDbFsConfig) Descriptor() ([]byte, []int) {
+	return file_zorroprotos_config_plugin_config_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *IndexedDbFsConfig) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+// Config for the in memory file system
+type MemoryFsConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *MemoryFsConfig) Reset() {
+	*x = MemoryFsConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MemoryFsConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MemoryFsConfig) ProtoMessage() {}
+
+func (x *MemoryFsConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MemoryFsConfig.ProtoReflect.Descriptor instead.
+func (*MemoryFsConfig) Descriptor() ([]byte, []int) {
+	return file_zorroprotos_config_plugin_config_proto_rawDescGZIP(), []int{2}
+}
+
+// Config for a selected file system
+type RepositoryConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Type FileSystemType `protobuf:"varint,1,opt,name=type,proto3,enum=zorro.FileSystemType" json:"type,omitempty"`
+	// Types that are assignable to Config:
+	//
+	//	*RepositoryConfig_Os
+	//	*RepositoryConfig_IndexedDb
+	//	*RepositoryConfig_Memory
+	Config isRepositoryConfig_Config `protobuf_oneof:"config"`
+	Path   string                    `protobuf:"bytes,5,opt,name=path,proto3" json:"path,omitempty"`
+}
+
+func (x *RepositoryConfig) Reset() {
+	*x = RepositoryConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RepositoryConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepositoryConfig) ProtoMessage() {}
+
+func (x *RepositoryConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepositoryConfig.ProtoReflect.Descriptor instead.
+func (*RepositoryConfig) Descriptor() ([]byte, []int) {
+	return file_zorroprotos_config_plugin_config_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *RepositoryConfig) GetType() FileSystemType {
+	if x != nil {
+		return x.Type
+	}
+	return FileSystemType_Os
+}
+
+func (m *RepositoryConfig) GetConfig() isRepositoryConfig_Config {
+	if m != nil {
+		return m.Config
+	}
+	return nil
+}
+
+func (x *RepositoryConfig) GetOs() *OsFsConfig {
+	if x, ok := x.GetConfig().(*RepositoryConfig_Os); ok {
+		return x.Os
+	}
+	return nil
+}
+
+func (x *RepositoryConfig) GetIndexedDb() *IndexedDbFsConfig {
+	if x, ok := x.GetConfig().(*RepositoryConfig_IndexedDb); ok {
+		return x.IndexedDb
+	}
+	return nil
+}
+
+func (x *RepositoryConfig) GetMemory() *MemoryFsConfig {
+	if x, ok := x.GetConfig().(*RepositoryConfig_Memory); ok {
+		return x.Memory
+	}
+	return nil
+}
+
+func (x *RepositoryConfig) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+type isRepositoryConfig_Config interface {
+	isRepositoryConfig_Config()
+}
+
+type RepositoryConfig_Os struct {
+	Os *OsFsConfig `protobuf:"bytes,2,opt,name=os,proto3,oneof"`
+}
+
+type RepositoryConfig_IndexedDb struct {
+	IndexedDb *IndexedDbFsConfig `protobuf:"bytes,3,opt,name=indexedDb,proto3,oneof"`
+}
+
+type RepositoryConfig_Memory struct {
+	Memory *MemoryFsConfig `protobuf:"bytes,4,opt,name=memory,proto3,oneof"`
+}
+
+func (*RepositoryConfig_Os) isRepositoryConfig_Config() {}
+
+func (*RepositoryConfig_IndexedDb) isRepositoryConfig_Config() {}
+
+func (*RepositoryConfig_Memory) isRepositoryConfig_Config() {}
+
 // Config related to the plugins
 type PluginConfig struct {
 	state         protoimpl.MessageState
@@ -29,7 +317,7 @@ type PluginConfig struct {
 	// The list of plugins that will be required all the time
 	DefaultRequire []string `protobuf:"bytes,1,rep,name=default_require,json=defaultRequire,proto3" json:"default_require,omitempty"`
 	// List of plugin repository addresses
-	Repositories []string `protobuf:"bytes,2,rep,name=repositories,proto3" json:"repositories,omitempty"`
+	RepositoryConfig []string `protobuf:"bytes,2,rep,name=RepositoryConfig,proto3" json:"RepositoryConfig,omitempty"`
 	// Maximum folder depth when looking for a plugin in a repository
 	SearchMaximumDepht int32 `protobuf:"varint,3,opt,name=search_maximum_depht,json=searchMaximumDepht,proto3" json:"search_maximum_depht,omitempty"`
 }
@@ -37,7 +325,7 @@ type PluginConfig struct {
 func (x *PluginConfig) Reset() {
 	*x = PluginConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[0]
+		mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -50,7 +338,7 @@ func (x *PluginConfig) String() string {
 func (*PluginConfig) ProtoMessage() {}
 
 func (x *PluginConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[0]
+	mi := &file_zorroprotos_config_plugin_config_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63,7 +351,7 @@ func (x *PluginConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PluginConfig.ProtoReflect.Descriptor instead.
 func (*PluginConfig) Descriptor() ([]byte, []int) {
-	return file_zorroprotos_config_plugin_config_proto_rawDescGZIP(), []int{0}
+	return file_zorroprotos_config_plugin_config_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *PluginConfig) GetDefaultRequire() []string {
@@ -73,9 +361,9 @@ func (x *PluginConfig) GetDefaultRequire() []string {
 	return nil
 }
 
-func (x *PluginConfig) GetRepositories() []string {
+func (x *PluginConfig) GetRepositoryConfig() []string {
 	if x != nil {
-		return x.Repositories
+		return x.RepositoryConfig
 	}
 	return nil
 }
@@ -93,19 +381,42 @@ var file_zorroprotos_config_plugin_config_proto_rawDesc = []byte{
 	0x0a, 0x26, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x63, 0x6f,
 	0x6e, 0x66, 0x69, 0x67, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x5f, 0x63, 0x6f, 0x6e, 0x66,
 	0x69, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x22,
-	0x8d, 0x01, 0x0a, 0x0c, 0x50, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
-	0x12, 0x27, 0x0a, 0x0f, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x5f, 0x72, 0x65, 0x71, 0x75,
-	0x69, 0x72, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0e, 0x64, 0x65, 0x66, 0x61, 0x75,
-	0x6c, 0x74, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x72, 0x65, 0x70,
-	0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52,
-	0x0c, 0x72, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x12, 0x30, 0x0a,
-	0x14, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x5f, 0x6d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x5f,
-	0x64, 0x65, 0x70, 0x68, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x12, 0x73, 0x65, 0x61,
-	0x72, 0x63, 0x68, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x44, 0x65, 0x70, 0x68, 0x74, 0x42,
-	0x32, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x41, 0x63,
-	0x65, 0x64, 0x79, 0x6e, 0x2f, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2f, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x6e,
-	0x66, 0x69, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x0c, 0x0a, 0x0a, 0x4f, 0x73, 0x46, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x22, 0x27, 0x0a,
+	0x11, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x65, 0x64, 0x44, 0x62, 0x46, 0x73, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x10, 0x0a, 0x0e, 0x4d, 0x65, 0x6d, 0x6f, 0x72, 0x79,
+	0x46, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x22, 0xeb, 0x01, 0x0a, 0x10, 0x52, 0x65, 0x70,
+	0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x29, 0x0a,
+	0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x15, 0x2e, 0x7a, 0x6f,
+	0x72, 0x72, 0x6f, 0x2e, 0x46, 0x69, 0x6c, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x54, 0x79,
+	0x70, 0x65, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x23, 0x0a, 0x02, 0x6f, 0x73, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x2e, 0x4f, 0x73, 0x46,
+	0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x48, 0x00, 0x52, 0x02, 0x6f, 0x73, 0x12, 0x38, 0x0a,
+	0x09, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x65, 0x64, 0x44, 0x62, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x18, 0x2e, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x2e, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x65, 0x64,
+	0x44, 0x62, 0x46, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x48, 0x00, 0x52, 0x09, 0x69, 0x6e,
+	0x64, 0x65, 0x78, 0x65, 0x64, 0x44, 0x62, 0x12, 0x2f, 0x0a, 0x06, 0x6d, 0x65, 0x6d, 0x6f, 0x72,
+	0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x2e,
+	0x4d, 0x65, 0x6d, 0x6f, 0x72, 0x79, 0x46, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x48, 0x00,
+	0x52, 0x06, 0x6d, 0x65, 0x6d, 0x6f, 0x72, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x42, 0x08, 0x0a, 0x06,
+	0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x22, 0x95, 0x01, 0x0a, 0x0c, 0x50, 0x6c, 0x75, 0x67, 0x69,
+	0x6e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x27, 0x0a, 0x0f, 0x64, 0x65, 0x66, 0x61, 0x75,
+	0x6c, 0x74, 0x5f, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09,
+	0x52, 0x0e, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65,
+	0x12, 0x2a, 0x0a, 0x10, 0x52, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x43, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x10, 0x52, 0x65, 0x70, 0x6f,
+	0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x30, 0x0a, 0x14,
+	0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x5f, 0x6d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x5f, 0x64,
+	0x65, 0x70, 0x68, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x12, 0x73, 0x65, 0x61, 0x72,
+	0x63, 0x68, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x44, 0x65, 0x70, 0x68, 0x74, 0x2a, 0x33,
+	0x0a, 0x0e, 0x46, 0x69, 0x6c, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65,
+	0x12, 0x06, 0x0a, 0x02, 0x4f, 0x73, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x49, 0x6e, 0x64, 0x65,
+	0x78, 0x65, 0x64, 0x44, 0x62, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x65, 0x6d, 0x6f, 0x72,
+	0x79, 0x10, 0x02, 0x42, 0x32, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x41, 0x63, 0x65, 0x64, 0x79, 0x6e, 0x2f, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x2d, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x7a, 0x6f, 0x72, 0x72, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73,
+	0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -120,16 +431,26 @@ func file_zorroprotos_config_plugin_config_proto_rawDescGZIP() []byte {
 	return file_zorroprotos_config_plugin_config_proto_rawDescData
 }
 
-var file_zorroprotos_config_plugin_config_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_zorroprotos_config_plugin_config_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_zorroprotos_config_plugin_config_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_zorroprotos_config_plugin_config_proto_goTypes = []interface{}{
-	(*PluginConfig)(nil), // 0: zorro.PluginConfig
+	(FileSystemType)(0),       // 0: zorro.FileSystemType
+	(*OsFsConfig)(nil),        // 1: zorro.OsFsConfig
+	(*IndexedDbFsConfig)(nil), // 2: zorro.IndexedDbFsConfig
+	(*MemoryFsConfig)(nil),    // 3: zorro.MemoryFsConfig
+	(*RepositoryConfig)(nil),  // 4: zorro.RepositoryConfig
+	(*PluginConfig)(nil),      // 5: zorro.PluginConfig
 }
 var file_zorroprotos_config_plugin_config_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: zorro.RepositoryConfig.type:type_name -> zorro.FileSystemType
+	1, // 1: zorro.RepositoryConfig.os:type_name -> zorro.OsFsConfig
+	2, // 2: zorro.RepositoryConfig.indexedDb:type_name -> zorro.IndexedDbFsConfig
+	3, // 3: zorro.RepositoryConfig.memory:type_name -> zorro.MemoryFsConfig
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_zorroprotos_config_plugin_config_proto_init() }
@@ -139,6 +460,54 @@ func file_zorroprotos_config_plugin_config_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_zorroprotos_config_plugin_config_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OsFsConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_zorroprotos_config_plugin_config_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IndexedDbFsConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_zorroprotos_config_plugin_config_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MemoryFsConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_zorroprotos_config_plugin_config_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RepositoryConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_zorroprotos_config_plugin_config_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PluginConfig); i {
 			case 0:
 				return &v.state
@@ -151,18 +520,24 @@ func file_zorroprotos_config_plugin_config_proto_init() {
 			}
 		}
 	}
+	file_zorroprotos_config_plugin_config_proto_msgTypes[3].OneofWrappers = []interface{}{
+		(*RepositoryConfig_Os)(nil),
+		(*RepositoryConfig_IndexedDb)(nil),
+		(*RepositoryConfig_Memory)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_zorroprotos_config_plugin_config_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   1,
+			NumEnums:      1,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_zorroprotos_config_plugin_config_proto_goTypes,
 		DependencyIndexes: file_zorroprotos_config_plugin_config_proto_depIdxs,
+		EnumInfos:         file_zorroprotos_config_plugin_config_proto_enumTypes,
 		MessageInfos:      file_zorroprotos_config_plugin_config_proto_msgTypes,
 	}.Build()
 	File_zorroprotos_config_plugin_config_proto = out.File

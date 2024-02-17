@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&zorroprotos/config/plugin_config.proto\x12\x05zorro\"[\n\x0cPluginConfig\x12\x17\n\x0f\x64\x65\x66\x61ult_require\x18\x01 \x03(\t\x12\x14\n\x0crepositories\x18\x02 \x03(\t\x12\x1c\n\x14search_maximum_depht\x18\x03 \x01(\x05\x42\x32Z0github.com/Acedyn/zorro-proto/zorroprotos/configb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&zorroprotos/config/plugin_config.proto\x12\x05zorro\"\x0c\n\nOsFsConfig\"!\n\x11IndexedDbFsConfig\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x10\n\x0eMemoryFsConfig\"\xc8\x01\n\x10RepositoryConfig\x12#\n\x04type\x18\x01 \x01(\x0e\x32\x15.zorro.FileSystemType\x12\x1f\n\x02os\x18\x02 \x01(\x0b\x32\x11.zorro.OsFsConfigH\x00\x12-\n\tindexedDb\x18\x03 \x01(\x0b\x32\x18.zorro.IndexedDbFsConfigH\x00\x12\'\n\x06memory\x18\x04 \x01(\x0b\x32\x15.zorro.MemoryFsConfigH\x00\x12\x0c\n\x04path\x18\x05 \x01(\tB\x08\n\x06\x63onfig\"_\n\x0cPluginConfig\x12\x17\n\x0f\x64\x65\x66\x61ult_require\x18\x01 \x03(\t\x12\x18\n\x10RepositoryConfig\x18\x02 \x03(\t\x12\x1c\n\x14search_maximum_depht\x18\x03 \x01(\x05*3\n\x0e\x46ileSystemType\x12\x06\n\x02Os\x10\x00\x12\r\n\tIndexedDb\x10\x01\x12\n\n\x06Memory\x10\x02\x42\x32Z0github.com/Acedyn/zorro-proto/zorroprotos/configb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -21,6 +21,16 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'zorroprotos.config.plugin_c
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z0github.com/Acedyn/zorro-proto/zorroprotos/config'
-  _globals['_PLUGINCONFIG']._serialized_start=49
-  _globals['_PLUGINCONFIG']._serialized_end=140
+  _globals['_FILESYSTEMTYPE']._serialized_start=416
+  _globals['_FILESYSTEMTYPE']._serialized_end=467
+  _globals['_OSFSCONFIG']._serialized_start=49
+  _globals['_OSFSCONFIG']._serialized_end=61
+  _globals['_INDEXEDDBFSCONFIG']._serialized_start=63
+  _globals['_INDEXEDDBFSCONFIG']._serialized_end=96
+  _globals['_MEMORYFSCONFIG']._serialized_start=98
+  _globals['_MEMORYFSCONFIG']._serialized_end=114
+  _globals['_REPOSITORYCONFIG']._serialized_start=117
+  _globals['_REPOSITORYCONFIG']._serialized_end=317
+  _globals['_PLUGINCONFIG']._serialized_start=319
+  _globals['_PLUGINCONFIG']._serialized_end=414
 # @@protoc_insertion_point(module_scope)

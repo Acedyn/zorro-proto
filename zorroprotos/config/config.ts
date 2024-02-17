@@ -1,6 +1,5 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { FileSystemsConfig } from "./fs_config";
 import { NetworkConfig } from "./network_config";
 import { PluginConfig } from "./plugin_config";
 import { UserConfig } from "./user_config";
@@ -12,16 +11,10 @@ export interface Config {
   userPreferences: UserConfig | undefined;
   pluginConfig: PluginConfig | undefined;
   networkConfig: NetworkConfig | undefined;
-  fileSystemsConfig: FileSystemsConfig | undefined;
 }
 
 function createBaseConfig(): Config {
-  return {
-    userPreferences: undefined,
-    pluginConfig: undefined,
-    networkConfig: undefined,
-    fileSystemsConfig: undefined,
-  };
+  return { userPreferences: undefined, pluginConfig: undefined, networkConfig: undefined };
 }
 
 export const Config = {
@@ -34,9 +27,6 @@ export const Config = {
     }
     if (message.networkConfig !== undefined) {
       NetworkConfig.encode(message.networkConfig, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.fileSystemsConfig !== undefined) {
-      FileSystemsConfig.encode(message.fileSystemsConfig, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -69,13 +59,6 @@ export const Config = {
 
           message.networkConfig = NetworkConfig.decode(reader, reader.uint32());
           continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.fileSystemsConfig = FileSystemsConfig.decode(reader, reader.uint32());
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -90,9 +73,6 @@ export const Config = {
       userPreferences: isSet(object.userPreferences) ? UserConfig.fromJSON(object.userPreferences) : undefined,
       pluginConfig: isSet(object.pluginConfig) ? PluginConfig.fromJSON(object.pluginConfig) : undefined,
       networkConfig: isSet(object.networkConfig) ? NetworkConfig.fromJSON(object.networkConfig) : undefined,
-      fileSystemsConfig: isSet(object.fileSystemsConfig)
-        ? FileSystemsConfig.fromJSON(object.fileSystemsConfig)
-        : undefined,
     };
   },
 
@@ -106,9 +86,6 @@ export const Config = {
     }
     if (message.networkConfig !== undefined) {
       obj.networkConfig = NetworkConfig.toJSON(message.networkConfig);
-    }
-    if (message.fileSystemsConfig !== undefined) {
-      obj.fileSystemsConfig = FileSystemsConfig.toJSON(message.fileSystemsConfig);
     }
     return obj;
   },
@@ -126,9 +103,6 @@ export const Config = {
       : undefined;
     message.networkConfig = (object.networkConfig !== undefined && object.networkConfig !== null)
       ? NetworkConfig.fromPartial(object.networkConfig)
-      : undefined;
-    message.fileSystemsConfig = (object.fileSystemsConfig !== undefined && object.fileSystemsConfig !== null)
-      ? FileSystemsConfig.fromPartial(object.fileSystemsConfig)
       : undefined;
     return message;
   },
