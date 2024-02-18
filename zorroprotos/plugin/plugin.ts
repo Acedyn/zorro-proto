@@ -1,5 +1,6 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { RepositoryConfig } from "../config/plugin_config";
 import { Processor } from "../processor/processor";
 import { PluginEnv } from "./plugin_env";
 import { PluginTools } from "./plugin_tools";
@@ -29,6 +30,8 @@ export interface Plugin {
     | undefined;
   /** List of processors to register as available processors to launch */
   processors: Processor[];
+  /** The config of the repository this plugin is comming from */
+  repository: RepositoryConfig | undefined;
 }
 
 export interface Plugin_EnvEntry {
@@ -37,7 +40,17 @@ export interface Plugin_EnvEntry {
 }
 
 function createBasePlugin(): Plugin {
-  return { name: "", version: "", label: "", path: "", require: [], env: {}, tools: undefined, processors: [] };
+  return {
+    name: "",
+    version: "",
+    label: "",
+    path: "",
+    require: [],
+    env: {},
+    tools: undefined,
+    processors: [],
+    repository: undefined,
+  };
 }
 
 export const Plugin = {
@@ -65,6 +78,9 @@ export const Plugin = {
     }
     for (const v of message.processors) {
       Processor.encode(v!, writer.uint32(66).fork()).ldelim();
+    }
+    if (message.repository !== undefined) {
+      RepositoryConfig.encode(message.repository, writer.uint32(74).fork()).ldelim();
     }
     return writer;
   },
@@ -135,6 +151,13 @@ export const Plugin = {
 
           message.processors.push(Processor.decode(reader, reader.uint32()));
           continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.repository = RepositoryConfig.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -161,6 +184,7 @@ export const Plugin = {
       processors: globalThis.Array.isArray(object?.processors)
         ? object.processors.map((e: any) => Processor.fromJSON(e))
         : [],
+      repository: isSet(object.repository) ? RepositoryConfig.fromJSON(object.repository) : undefined,
     };
   },
 
@@ -196,6 +220,9 @@ export const Plugin = {
     if (message.processors?.length) {
       obj.processors = message.processors.map((e) => Processor.toJSON(e));
     }
+    if (message.repository !== undefined) {
+      obj.repository = RepositoryConfig.toJSON(message.repository);
+    }
     return obj;
   },
 
@@ -219,6 +246,9 @@ export const Plugin = {
       ? PluginTools.fromPartial(object.tools)
       : undefined;
     message.processors = object.processors?.map((e) => Processor.fromPartial(e)) || [];
+    message.repository = (object.repository !== undefined && object.repository !== null)
+      ? RepositoryConfig.fromPartial(object.repository)
+      : undefined;
     return message;
   },
 };

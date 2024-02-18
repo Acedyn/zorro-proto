@@ -4,6 +4,7 @@ package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/plugin";
 
 import "zorroprotos/processor/processor.proto";
+import "zorroprotos/config/plugin_config.proto";
 import "zorroprotos/plugin/plugin_env.proto";
 import "zorroprotos/plugin/plugin_tools.proto";
 
@@ -26,4 +27,6 @@ message Plugin {
   PluginTools tools = 7;
   // List of processors to register as available processors to launch
   repeated Processor processors = 8;
+  // The config of the repository this plugin is comming from
+  RepositoryConfig repository = 9;
 }

@@ -1,4 +1,5 @@
 from zorroprotos.processor import processor_pb2 as _processor_pb2
+from zorroprotos.config import plugin_config_pb2 as _plugin_config_pb2
 from zorroprotos.plugin import plugin_env_pb2 as _plugin_env_pb2
 from zorroprotos.plugin import plugin_tools_pb2 as _plugin_tools_pb2
 from google.protobuf.internal import containers as _containers
@@ -9,7 +10,7 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Plugin(_message.Message):
-    __slots__ = ["name", "version", "label", "path", "require", "env", "tools", "processors"]
+    __slots__ = ["name", "version", "label", "path", "require", "env", "tools", "processors", "repository"]
     class EnvEntry(_message.Message):
         __slots__ = ["key", "value"]
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -25,6 +26,7 @@ class Plugin(_message.Message):
     ENV_FIELD_NUMBER: _ClassVar[int]
     TOOLS_FIELD_NUMBER: _ClassVar[int]
     PROCESSORS_FIELD_NUMBER: _ClassVar[int]
+    REPOSITORY_FIELD_NUMBER: _ClassVar[int]
     name: str
     version: str
     label: str
@@ -33,4 +35,5 @@ class Plugin(_message.Message):
     env: _containers.MessageMap[str, _plugin_env_pb2.PluginEnv]
     tools: _plugin_tools_pb2.PluginTools
     processors: _containers.RepeatedCompositeFieldContainer[_processor_pb2.Processor]
-    def __init__(self, name: _Optional[str] = ..., version: _Optional[str] = ..., label: _Optional[str] = ..., path: _Optional[str] = ..., require: _Optional[_Iterable[str]] = ..., env: _Optional[_Mapping[str, _plugin_env_pb2.PluginEnv]] = ..., tools: _Optional[_Union[_plugin_tools_pb2.PluginTools, _Mapping]] = ..., processors: _Optional[_Iterable[_Union[_processor_pb2.Processor, _Mapping]]] = ...) -> None: ...
+    repository: _plugin_config_pb2.RepositoryConfig
+    def __init__(self, name: _Optional[str] = ..., version: _Optional[str] = ..., label: _Optional[str] = ..., path: _Optional[str] = ..., require: _Optional[_Iterable[str]] = ..., env: _Optional[_Mapping[str, _plugin_env_pb2.PluginEnv]] = ..., tools: _Optional[_Union[_plugin_tools_pb2.PluginTools, _Mapping]] = ..., processors: _Optional[_Iterable[_Union[_processor_pb2.Processor, _Mapping]]] = ..., repository: _Optional[_Union[_plugin_config_pb2.RepositoryConfig, _Mapping]] = ...) -> None: ...
