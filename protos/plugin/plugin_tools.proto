@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package zorro;
-option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/plugin";
+option go_package = "github.com/Acedyn/zorro-proto/gen/protos/plugin";
 
 // Specify where to look for tools of a category
 message ToolsDeclaration {

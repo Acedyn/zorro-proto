@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package zorro;
-option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/tools";
+option go_package = "github.com/Acedyn/zorro-proto/gen/protos/tools";
 
 import "protos/tools/tool.proto";
 import "protos/scheduling/processor_query.proto";

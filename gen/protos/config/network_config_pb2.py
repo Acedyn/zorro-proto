@@ -13,14 +13,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"protos/config/network_config.proto\x12\x05zorro\"5\n\rNetworkConfig\x12\x11\n\tGRPC_port\x18\x01 \x01(\x05\x12\x11\n\tGRPC_host\x18\x02 \x01(\tB2Z0github.com/Acedyn/zorro-proto/zorroprotos/configb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"protos/config/network_config.proto\x12\x05zorro\"5\n\rNetworkConfig\x12\x11\n\tGRPC_port\x18\x01 \x01(\x05\x12\x11\n\tGRPC_host\x18\x02 \x01(\tB1Z/github.com/Acedyn/zorro-proto/gen/protos/configb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'protos.config.network_config_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'Z0github.com/Acedyn/zorro-proto/zorroprotos/config'
+  DESCRIPTOR._serialized_options = b'Z/github.com/Acedyn/zorro-proto/gen/protos/config'
   _globals['_NETWORKCONFIG']._serialized_start=45
   _globals['_NETWORKCONFIG']._serialized_end=98
 # @@protoc_insertion_point(module_scope)

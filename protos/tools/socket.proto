@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package zorro;
-option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/tools";
+option go_package = "github.com/Acedyn/zorro-proto/gen/protos/tools";
 
 // A socket acts as a payload for the input/output between two tools
 message Socket {

@@ -8,7 +8,7 @@ package scheduling
 
 import (
 	context "context"
-	processor "github.com/Acedyn/zorro-proto/zorroprotos/processor"
+	processor "github.com/Acedyn/zorro-proto/gen/protos/processor"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

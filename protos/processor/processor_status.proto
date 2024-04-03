@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package zorro;
-option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/processor";
+option go_package = "github.com/Acedyn/zorro-proto/gen/protos/processor";
 
 enum ProcessorStatus {
   STARTING = 0;       // The program is starting

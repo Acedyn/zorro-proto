@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package zorro;
-option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/config";
+option go_package = "github.com/Acedyn/zorro-proto/gen/protos/config";
 
 import "protos/filesystem/fs.proto";
 

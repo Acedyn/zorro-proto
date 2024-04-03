@@ -16,14 +16,14 @@ from protos.config import plugin_config_pb2 as protos_dot_config_dot_plugin__con
 from protos.config import network_config_pb2 as protos_dot_config_dot_network__config__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1aprotos/config/config.proto\x12\x05zorro\x1a\x1fprotos/config/user_config.proto\x1a!protos/config/plugin_config.proto\x1a\"protos/config/network_config.proto\"\x8f\x01\n\x06\x43onfig\x12+\n\x10user_preferences\x18\x01 \x01(\x0b\x32\x11.zorro.UserConfig\x12*\n\rplugin_config\x18\x02 \x01(\x0b\x32\x13.zorro.PluginConfig\x12,\n\x0enetwork_config\x18\x03 \x01(\x0b\x32\x14.zorro.NetworkConfigB2Z0github.com/Acedyn/zorro-proto/zorroprotos/configb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1aprotos/config/config.proto\x12\x05zorro\x1a\x1fprotos/config/user_config.proto\x1a!protos/config/plugin_config.proto\x1a\"protos/config/network_config.proto\"\x8f\x01\n\x06\x43onfig\x12+\n\x10user_preferences\x18\x01 \x01(\x0b\x32\x11.zorro.UserConfig\x12*\n\rplugin_config\x18\x02 \x01(\x0b\x32\x13.zorro.PluginConfig\x12,\n\x0enetwork_config\x18\x03 \x01(\x0b\x32\x14.zorro.NetworkConfigB1Z/github.com/Acedyn/zorro-proto/gen/protos/configb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'protos.config.config_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'Z0github.com/Acedyn/zorro-proto/zorroprotos/config'
+  DESCRIPTOR._serialized_options = b'Z/github.com/Acedyn/zorro-proto/gen/protos/config'
   _globals['_CONFIG']._serialized_start=142
   _globals['_CONFIG']._serialized_end=285
 # @@protoc_insertion_point(module_scope)

@@ -13,14 +13,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1eprotos/plugin/plugin_env.proto\x12\x05zorro\"F\n\tPluginEnv\x12\x0e\n\x06\x61ppend\x18\x01 \x03(\t\x12\x0f\n\x07prepend\x18\x02 \x03(\t\x12\x10\n\x03set\x18\x03 \x01(\tH\x00\x88\x01\x01\x42\x06\n\x04_setB2Z0github.com/Acedyn/zorro-proto/zorroprotos/pluginb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1eprotos/plugin/plugin_env.proto\x12\x05zorro\"F\n\tPluginEnv\x12\x0e\n\x06\x61ppend\x18\x01 \x03(\t\x12\x0f\n\x07prepend\x18\x02 \x03(\t\x12\x10\n\x03set\x18\x03 \x01(\tH\x00\x88\x01\x01\x42\x06\n\x04_setB1Z/github.com/Acedyn/zorro-proto/gen/protos/pluginb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'protos.plugin.plugin_env_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'Z0github.com/Acedyn/zorro-proto/zorroprotos/plugin'
+  DESCRIPTOR._serialized_options = b'Z/github.com/Acedyn/zorro-proto/gen/protos/plugin'
   _globals['_PLUGINENV']._serialized_start=41
   _globals['_PLUGINENV']._serialized_end=111
 # @@protoc_insertion_point(module_scope)

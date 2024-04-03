@@ -17,7 +17,7 @@ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 - Generate the go code
 
 ```bash
-protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative ./zorroprotos/**/*.proto
+protoc --go_out=gen --go_opt=paths=source_relative --go-grpc_out=gen --go-grpc_opt=paths=source_relative ./protos/**/*.proto
 ```
 
 Since go imports are importing from this repository directly, you have to commit and
@@ -34,7 +34,7 @@ python -m pip install grpcio-tools
 - Generate the python code
 
 ```bash
-python -m grpc_tools.protoc -I. --python_out=. --pyi_out=. --grpc_python_out=. ./zorroprotos/**/*.proto
+python -m grpc_tools.protoc -I. --python_out=gen --pyi_out=gen --grpc_python_out=gen ./protos/**/*.proto
 ```
 
 
@@ -49,5 +49,9 @@ npm install ts-proto -g
 - Generate the typescript code
 
 ```bash
-protoc --plugin=protoc-gen-ts_proto.cmd --ts_proto_out=. .\zorroprotos\**\*.proto
+protoc --plugin=protoc-gen-ts_proto.cmd --ts_proto_out=gen .\protos\**\*.proto
 ```
+
+### Global
+
+You can also use the build scripts in the ``scripts`` folder to build for all the languages at once

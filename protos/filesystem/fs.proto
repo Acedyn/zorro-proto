@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package zorro;
-option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/filesystem";
+option go_package = "github.com/Acedyn/zorro-proto/gen/protos/filesystem";
 
 // List all the available file systems
 enum FileSystemType {

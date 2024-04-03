@@ -15,14 +15,14 @@ from protos.tools import tool_pb2 as protos_dot_tools_dot_tool__pb2
 from protos.tools import command_pb2 as protos_dot_tools_dot_command__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19protos/tools/action.proto\x12\x05zorro\x1a\x17protos/tools/tool.proto\x1a\x1aprotos/tools/command.proto\"l\n\x0b\x41\x63tionChild\x12!\n\x07\x63ommand\x18\x01 \x01(\x0b\x32\x0e.zorro.CommandH\x00\x12\x1f\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32\r.zorro.ActionH\x00\x12\x10\n\x08upstream\x18\x03 \x03(\tB\x07\n\x05\x63hild\"\x9b\x01\n\x06\x41\x63tion\x12\x1d\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\x0f.zorro.ToolBase\x12-\n\x08\x63hildren\x18\x02 \x03(\x0b\x32\x1b.zorro.Action.ChildrenEntry\x1a\x43\n\rChildrenEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12!\n\x05value\x18\x02 \x01(\x0b\x32\x12.zorro.ActionChild:\x02\x38\x01\x42\x31Z/github.com/Acedyn/zorro-proto/zorroprotos/toolsb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19protos/tools/action.proto\x12\x05zorro\x1a\x17protos/tools/tool.proto\x1a\x1aprotos/tools/command.proto\"l\n\x0b\x41\x63tionChild\x12!\n\x07\x63ommand\x18\x01 \x01(\x0b\x32\x0e.zorro.CommandH\x00\x12\x1f\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32\r.zorro.ActionH\x00\x12\x10\n\x08upstream\x18\x03 \x03(\tB\x07\n\x05\x63hild\"\x9b\x01\n\x06\x41\x63tion\x12\x1d\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\x0f.zorro.ToolBase\x12-\n\x08\x63hildren\x18\x02 \x03(\x0b\x32\x1b.zorro.Action.ChildrenEntry\x1a\x43\n\rChildrenEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12!\n\x05value\x18\x02 \x01(\x0b\x32\x12.zorro.ActionChild:\x02\x38\x01\x42\x30Z.github.com/Acedyn/zorro-proto/gen/protos/toolsb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'protos.tools.action_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'Z/github.com/Acedyn/zorro-proto/zorroprotos/tools'
+  DESCRIPTOR._serialized_options = b'Z.github.com/Acedyn/zorro-proto/gen/protos/tools'
   _ACTION_CHILDRENENTRY._options = None
   _ACTION_CHILDRENENTRY._serialized_options = b'8\001'
   _globals['_ACTIONCHILD']._serialized_start=89
