@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package zorro;
+option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/config";
+
+import "protos/config/user_config.proto";
+import "protos/config/plugin_config.proto";
+import "protos/config/network_config.proto";
+
+// Global config of the application
+message Config {
+  UserConfig user_preferences = 1;
+  PluginConfig plugin_config = 2;
+  NetworkConfig network_config = 3;
+}
