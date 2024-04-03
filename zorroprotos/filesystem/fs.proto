@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package zorro;
+option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/filesystem";
+
+// List all the available file systems
+enum FileSystemType {
+  Os = 0;
+  IndexedDb = 1;
+  Memory = 2;
+}
+
+// Settings for the OS file systems
+message OsFsSettings {
+  string directory = 1;
+}
+
+// Settings for the indexed DB file systems
+message IndexedDbFsSettings {
+  string name = 1;
+}
+
+// Settings for the in memory file systems
+message MemoryFsSettings {
+  string name = 1;
+}
+
+// Settings for a selected file system
+message FileSystemSettings {
+  FileSystemType file_system_type = 1;
+  oneof file_system_settings {
+    OsFsSettings os = 2;
+    IndexedDbFsSettings indexedDb = 3;
+    MemoryFsSettings memory = 4;
+  }
+}

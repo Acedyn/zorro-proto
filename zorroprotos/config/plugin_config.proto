@@ -3,44 +3,14 @@ syntax = "proto3";
 package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/zorroprotos/config";
 
-// List all the available file systems
-enum FileSystemType {
-  Os = 0;
-  IndexedDb = 1;
-  Memory = 2;
-}
-
-// Config for the OS file system
-message OsFsConfig {
-  string directory = 1;
-}
-
-// Config for the indexed DB file system
-message IndexedDbFsConfig {
-  string name = 1;
-}
-
-// Config for the in memory file system
-message MemoryFsConfig {
-
-}
-
-// Config for a selected file system
-message RepositoryConfig {
-  FileSystemType file_system_type = 1;
-  oneof file_system_config {
-    OsFsConfig os = 2;
-    IndexedDbFsConfig indexedDb = 3;
-    MemoryFsConfig memory = 4;
-  }
-}
+import "zorroprotos/filesystem/fs.proto";
 
 // Config related to the plugins
 message PluginConfig {
   // The list of plugins that will be required all the time
   repeated string default_require = 1;
-  // List of plugin repository addresses
-  repeated RepositoryConfig repositories = 2;
+  // List of folders where to look for settings
+  repeated FileSystemSettings repositories = 2;
   // Maximum folder depth when looking for a plugin in a repository
   int32 search_maximum_depht= 3;
 }
