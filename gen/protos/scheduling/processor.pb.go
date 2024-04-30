@@ -7,7 +7,6 @@
 package scheduling
 
 import (
-	processor "github.com/Acedyn/zorro-proto/gen/protos/processor"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -44,7 +43,7 @@ type Processor struct {
 	// Template to run the program with the processor running
 	StartProcessorTemplate string `protobuf:"bytes,8,opt,name=start_processor_template,json=startProcessorTemplate,proto3" json:"start_processor_template,omitempty"`
 	// Help knowing at which state is the processor
-	Status processor.ProcessorStatus `protobuf:"varint,9,opt,name=status,proto3,enum=zorro.ProcessorStatus" json:"status,omitempty"`
+	Status ProcessorStatus `protobuf:"varint,9,opt,name=status,proto3,enum=zorro.ProcessorStatus" json:"status,omitempty"`
 	// Extra data used mainly for filters
 	Metadata map[string]string `protobuf:"bytes,10,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Used to list the output logs by timestamps
@@ -140,11 +139,11 @@ func (x *Processor) GetStartProcessorTemplate() string {
 	return ""
 }
 
-func (x *Processor) GetStatus() processor.ProcessorStatus {
+func (x *Processor) GetStatus() ProcessorStatus {
 	if x != nil {
 		return x.Status
 	}
-	return processor.ProcessorStatus(0)
+	return ProcessorStatus_STARTING
 }
 
 func (x *Processor) GetMetadata() map[string]string {
@@ -237,11 +236,11 @@ func file_protos_scheduling_processor_proto_rawDescGZIP() []byte {
 
 var file_protos_scheduling_processor_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_protos_scheduling_processor_proto_goTypes = []interface{}{
-	(*Processor)(nil),              // 0: zorro.Processor
-	nil,                            // 1: zorro.Processor.MetadataEntry
-	nil,                            // 2: zorro.Processor.StdoutEntry
-	nil,                            // 3: zorro.Processor.StderrEntry
-	(processor.ProcessorStatus)(0), // 4: zorro.ProcessorStatus
+	(*Processor)(nil),    // 0: zorro.Processor
+	nil,                  // 1: zorro.Processor.MetadataEntry
+	nil,                  // 2: zorro.Processor.StdoutEntry
+	nil,                  // 3: zorro.Processor.StderrEntry
+	(ProcessorStatus)(0), // 4: zorro.ProcessorStatus
 }
 var file_protos_scheduling_processor_proto_depIdxs = []int32{
 	4, // 0: zorro.Processor.status:type_name -> zorro.ProcessorStatus
@@ -260,6 +259,7 @@ func file_protos_scheduling_processor_proto_init() {
 	if File_protos_scheduling_processor_proto != nil {
 		return
 	}
+	file_protos_scheduling_processor_status_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_protos_scheduling_processor_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Processor); i {
