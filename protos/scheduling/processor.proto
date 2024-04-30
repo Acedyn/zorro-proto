@@ -3,6 +3,8 @@ syntax = "proto3";
 package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/gen/protos/scheduling";
 
+import "protos/scheduling/processor_status.proto";
+
 // Processors are responsible for executing commands
 message Processor {
   // The Id is used to differentiate processor instances
@@ -21,6 +23,8 @@ message Processor {
   string start_program_template = 7;
   // Template to run the program with the processor running
   string start_processor_template = 8;
+  // Help knowing at which state is the processor
+  ProcessorStatus status = 9;
   // Extra data used mainly for filters
   map<string, string> metadata = 10;
   // Used to list the output logs by timestamps

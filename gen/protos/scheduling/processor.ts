@@ -1,5 +1,6 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { ProcessorStatus, processorStatusFromJSON, processorStatusToJSON } from "./processor_status";
 import Long = require("long");
 
 export const protobufPackage = "zorro";
@@ -22,6 +23,8 @@ export interface Processor {
   startProgramTemplate: string;
   /** Template to run the program with the processor running */
   startProcessorTemplate: string;
+  /** Help knowing at which state is the processor */
+  status: ProcessorStatus;
   /** Extra data used mainly for filters */
   metadata: { [key: string]: string };
   /** Used to list the output logs by timestamps */
@@ -54,6 +57,7 @@ function createBaseProcessor(): Processor {
     subsets: [],
     startProgramTemplate: "",
     startProcessorTemplate: "",
+    status: 0,
     metadata: {},
     stdout: {},
     stderr: {},
@@ -85,6 +89,9 @@ export const Processor = {
     }
     if (message.startProcessorTemplate !== "") {
       writer.uint32(66).string(message.startProcessorTemplate);
+    }
+    if (message.status !== 0) {
+      writer.uint32(72).int32(message.status);
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
       Processor_MetadataEntry.encode({ key: key as any, value }, writer.uint32(82).fork()).ldelim();
@@ -161,6 +168,13 @@ export const Processor = {
 
           message.startProcessorTemplate = reader.string();
           continue;
+        case 9:
+          if (tag !== 72) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
         case 10:
           if (tag !== 82) {
             break;
@@ -212,6 +226,7 @@ export const Processor = {
       startProcessorTemplate: isSet(object.startProcessorTemplate)
         ? globalThis.String(object.startProcessorTemplate)
         : "",
+      status: isSet(object.status) ? processorStatusFromJSON(object.status) : 0,
       metadata: isObject(object.metadata)
         ? Object.entries(object.metadata).reduce<{ [key: string]: string }>((acc, [key, value]) => {
           acc[key] = String(value);
@@ -259,6 +274,9 @@ export const Processor = {
     if (message.startProcessorTemplate !== "") {
       obj.startProcessorTemplate = message.startProcessorTemplate;
     }
+    if (message.status !== 0) {
+      obj.status = processorStatusToJSON(message.status);
+    }
     if (message.metadata) {
       const entries = Object.entries(message.metadata);
       if (entries.length > 0) {
@@ -302,6 +320,7 @@ export const Processor = {
     message.subsets = object.subsets?.map((e) => e) || [];
     message.startProgramTemplate = object.startProgramTemplate ?? "";
     message.startProcessorTemplate = object.startProcessorTemplate ?? "";
+    message.status = object.status ?? 0;
     message.metadata = Object.entries(object.metadata ?? {}).reduce<{ [key: string]: string }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[key] = globalThis.String(value);
