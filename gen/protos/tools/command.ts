@@ -11,7 +11,7 @@ export interface Command {
   base:
     | ToolBase
     | undefined;
-  /** Query to select a running processor or to start a new one */
+  /** Query to select a scheduler and use a running processor or to start a new one */
   processorQuery: ProcessorQuery | undefined;
 }
 

@@ -29,7 +29,7 @@ type Command struct {
 
 	// All tools are composed of this field that contains required infos
 	Base *ToolBase `protobuf:"bytes,1,opt,name=base,proto3" json:"base,omitempty"`
-	// Query to select a running processor or to start a new one
+	// Query to select a scheduler and use a running processor or to start a new one
 	ProcessorQuery *scheduling.ProcessorQuery `protobuf:"bytes,2,opt,name=processor_query,json=processorQuery,proto3" json:"processor_query,omitempty"`
 }
 

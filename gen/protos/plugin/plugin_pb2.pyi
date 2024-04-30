@@ -1,4 +1,4 @@
-from protos.processor import processor_pb2 as _processor_pb2
+from protos.scheduling import processor_pb2 as _processor_pb2
 from protos.filesystem import fs_pb2 as _fs_pb2
 from protos.plugin import plugin_env_pb2 as _plugin_env_pb2
 from protos.plugin import plugin_tools_pb2 as _plugin_tools_pb2

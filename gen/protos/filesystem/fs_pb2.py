@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1aprotos/filesystem/fs.proto\x12\x05zorro\"!\n\x0cOsFsSettings\x12\x11\n\tdirectory\x18\x01 \x01(\t\"#\n\x13IndexedDbFsSettings\x12\x0c\n\x04name\x18\x01 \x01(\t\" \n\x10MemoryFsSettings\x12\x0c\n\x04name\x18\x01 \x01(\t\"\xdc\x01\n\x12\x46ileSystemSettings\x12/\n\x10\x66ile_system_type\x18\x01 \x01(\x0e\x32\x15.zorro.FileSystemType\x12!\n\x02os\x18\x02 \x01(\x0b\x32\x13.zorro.OsFsSettingsH\x00\x12/\n\tindexedDb\x18\x03 \x01(\x0b\x32\x1a.zorro.IndexedDbFsSettingsH\x00\x12)\n\x06memory\x18\x04 \x01(\x0b\x32\x17.zorro.MemoryFsSettingsH\x00\x42\x16\n\x14\x66ile_system_settings*3\n\x0e\x46ileSystemType\x12\x06\n\x02Os\x10\x00\x12\r\n\tIndexedDb\x10\x01\x12\n\n\x06Memory\x10\x02\x42\x35Z3github.com/Acedyn/zorro-proto/gen/protos/filesystemb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1aprotos/filesystem/fs.proto\x12\x05zorro\"!\n\x0cOsFsSettings\x12\x11\n\tdirectory\x18\x01 \x01(\t\"#\n\x13IndexedDbFsSettings\x12\x0c\n\x04name\x18\x01 \x01(\t\" \n\x10MemoryFsSettings\x12\x0c\n\x04name\x18\x01 \x01(\t\"\xab\x01\n\x12\x46ileSystemSettings\x12!\n\x02os\x18\x01 \x01(\x0b\x32\x13.zorro.OsFsSettingsH\x00\x12/\n\tindexedDb\x18\x02 \x01(\x0b\x32\x1a.zorro.IndexedDbFsSettingsH\x00\x12)\n\x06memory\x18\x03 \x01(\x0b\x32\x17.zorro.MemoryFsSettingsH\x00\x42\x16\n\x14\x66ile_system_settings*3\n\x0e\x46ileSystemType\x12\x06\n\x02Os\x10\x00\x12\r\n\tIndexedDb\x10\x01\x12\n\n\x06Memory\x10\x02\x42\x35Z3github.com/Acedyn/zorro-proto/gen/protos/filesystemb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -21,8 +21,8 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'protos.filesystem.fs_pb2', 
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z3github.com/Acedyn/zorro-proto/gen/protos/filesystem'
-  _globals['_FILESYSTEMTYPE']._serialized_start=366
-  _globals['_FILESYSTEMTYPE']._serialized_end=417
+  _globals['_FILESYSTEMTYPE']._serialized_start=317
+  _globals['_FILESYSTEMTYPE']._serialized_end=368
   _globals['_OSFSSETTINGS']._serialized_start=37
   _globals['_OSFSSETTINGS']._serialized_end=70
   _globals['_INDEXEDDBFSSETTINGS']._serialized_start=72
@@ -30,5 +30,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_MEMORYFSSETTINGS']._serialized_start=109
   _globals['_MEMORYFSSETTINGS']._serialized_end=141
   _globals['_FILESYSTEMSETTINGS']._serialized_start=144
-  _globals['_FILESYSTEMSETTINGS']._serialized_end=364
+  _globals['_FILESYSTEMSETTINGS']._serialized_end=315
 # @@protoc_insertion_point(module_scope)

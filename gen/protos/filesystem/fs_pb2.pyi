@@ -33,13 +33,11 @@ class MemoryFsSettings(_message.Message):
     def __init__(self, name: _Optional[str] = ...) -> None: ...
 
 class FileSystemSettings(_message.Message):
-    __slots__ = ["file_system_type", "os", "indexedDb", "memory"]
-    FILE_SYSTEM_TYPE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["os", "indexedDb", "memory"]
     OS_FIELD_NUMBER: _ClassVar[int]
     INDEXEDDB_FIELD_NUMBER: _ClassVar[int]
     MEMORY_FIELD_NUMBER: _ClassVar[int]
-    file_system_type: FileSystemType
     os: OsFsSettings
     indexedDb: IndexedDbFsSettings
     memory: MemoryFsSettings
-    def __init__(self, file_system_type: _Optional[_Union[FileSystemType, str]] = ..., os: _Optional[_Union[OsFsSettings, _Mapping]] = ..., indexedDb: _Optional[_Union[IndexedDbFsSettings, _Mapping]] = ..., memory: _Optional[_Union[MemoryFsSettings, _Mapping]] = ...) -> None: ...
+    def __init__(self, os: _Optional[_Union[OsFsSettings, _Mapping]] = ..., indexedDb: _Optional[_Union[IndexedDbFsSettings, _Mapping]] = ..., memory: _Optional[_Union[MemoryFsSettings, _Mapping]] = ...) -> None: ...

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { FileSystemSettings } from "../filesystem/fs";
-import { Processor } from "../processor/processor";
+import { Processor } from "../scheduling/processor";
 import { PluginEnv } from "./plugin_env";
 import { PluginTools } from "./plugin_tools";
 

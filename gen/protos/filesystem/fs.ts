@@ -60,7 +60,6 @@ export interface MemoryFsSettings {
 
 /** Settings for a selected file system */
 export interface FileSystemSettings {
-  fileSystemType: FileSystemType;
   os?: OsFsSettings | undefined;
   indexedDb?: IndexedDbFsSettings | undefined;
   memory?: MemoryFsSettings | undefined;
@@ -238,22 +237,19 @@ export const MemoryFsSettings = {
 };
 
 function createBaseFileSystemSettings(): FileSystemSettings {
-  return { fileSystemType: 0, os: undefined, indexedDb: undefined, memory: undefined };
+  return { os: undefined, indexedDb: undefined, memory: undefined };
 }
 
 export const FileSystemSettings = {
   encode(message: FileSystemSettings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.fileSystemType !== 0) {
-      writer.uint32(8).int32(message.fileSystemType);
-    }
     if (message.os !== undefined) {
-      OsFsSettings.encode(message.os, writer.uint32(18).fork()).ldelim();
+      OsFsSettings.encode(message.os, writer.uint32(10).fork()).ldelim();
     }
     if (message.indexedDb !== undefined) {
-      IndexedDbFsSettings.encode(message.indexedDb, writer.uint32(26).fork()).ldelim();
+      IndexedDbFsSettings.encode(message.indexedDb, writer.uint32(18).fork()).ldelim();
     }
     if (message.memory !== undefined) {
-      MemoryFsSettings.encode(message.memory, writer.uint32(34).fork()).ldelim();
+      MemoryFsSettings.encode(message.memory, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -266,28 +262,21 @@ export const FileSystemSettings = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.fileSystemType = reader.int32() as any;
+          message.os = OsFsSettings.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.os = OsFsSettings.decode(reader, reader.uint32());
+          message.indexedDb = IndexedDbFsSettings.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
-            break;
-          }
-
-          message.indexedDb = IndexedDbFsSettings.decode(reader, reader.uint32());
-          continue;
-        case 4:
-          if (tag !== 34) {
             break;
           }
 
@@ -304,7 +293,6 @@ export const FileSystemSettings = {
 
   fromJSON(object: any): FileSystemSettings {
     return {
-      fileSystemType: isSet(object.fileSystemType) ? fileSystemTypeFromJSON(object.fileSystemType) : 0,
       os: isSet(object.os) ? OsFsSettings.fromJSON(object.os) : undefined,
       indexedDb: isSet(object.indexedDb) ? IndexedDbFsSettings.fromJSON(object.indexedDb) : undefined,
       memory: isSet(object.memory) ? MemoryFsSettings.fromJSON(object.memory) : undefined,
@@ -313,9 +301,6 @@ export const FileSystemSettings = {
 
   toJSON(message: FileSystemSettings): unknown {
     const obj: any = {};
-    if (message.fileSystemType !== 0) {
-      obj.fileSystemType = fileSystemTypeToJSON(message.fileSystemType);
-    }
     if (message.os !== undefined) {
       obj.os = OsFsSettings.toJSON(message.os);
     }
@@ -333,7 +318,6 @@ export const FileSystemSettings = {
   },
   fromPartial<I extends Exact<DeepPartial<FileSystemSettings>, I>>(object: I): FileSystemSettings {
     const message = createBaseFileSystemSettings();
-    message.fileSystemType = object.fileSystemType ?? 0;
     message.os = (object.os !== undefined && object.os !== null) ? OsFsSettings.fromPartial(object.os) : undefined;
     message.indexedDb = (object.indexedDb !== undefined && object.indexedDb !== null)
       ? IndexedDbFsSettings.fromPartial(object.indexedDb)

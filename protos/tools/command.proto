@@ -10,6 +10,6 @@ import "protos/scheduling/processor_query.proto";
 message Command {
   // All tools are composed of this field that contains required infos
   ToolBase base = 1;
-  // Query to select a running processor or to start a new one
+  // Query to select a scheduler and use a running processor or to start a new one
   ProcessorQuery processor_query = 2;
 }

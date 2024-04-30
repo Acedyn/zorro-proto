@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19protos/tools/socket.proto\x12\x05zorro\"\xb5\x01\n\x06Socket\x12\x0c\n\x04kind\x18\x01 \x01(\t\x12\x0e\n\x04link\x18\x02 \x01(\tH\x00\x12\r\n\x03raw\x18\x03 \x01(\x0cH\x00\x12\x0c\n\x04json\x18\x04 \x01(\x0c\x12)\n\x06\x66ields\x18\x05 \x03(\x0b\x32\x19.zorro.Socket.FieldsEntry\x1a<\n\x0b\x46ieldsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1c\n\x05value\x18\x02 \x01(\x0b\x32\r.zorro.Socket:\x02\x38\x01\x42\x07\n\x05valueB0Z.github.com/Acedyn/zorro-proto/gen/protos/toolsb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19protos/tools/socket.proto\x12\x05zorro\"}\n\x0cSocketFields\x12/\n\x06\x66ields\x18\x01 \x03(\x0b\x32\x1f.zorro.SocketFields.FieldsEntry\x1a<\n\x0b\x46ieldsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1c\n\x05value\x18\x02 \x01(\x0b\x32\r.zorro.Socket:\x02\x38\x01\"s\n\x06Socket\x12\x0c\n\x04kind\x18\x01 \x01(\t\x12\x0e\n\x04link\x18\x02 \x01(\tH\x00\x12\r\n\x03raw\x18\x03 \x01(\x0cH\x00\x12%\n\x06\x66ields\x18\x04 \x01(\x0b\x32\x13.zorro.SocketFieldsH\x00\x12\x0c\n\x04json\x18\x05 \x01(\x0c\x42\x07\n\x05valueB0Z.github.com/Acedyn/zorro-proto/gen/protos/toolsb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -21,10 +21,12 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'protos.tools.socket_pb2', _
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z.github.com/Acedyn/zorro-proto/gen/protos/tools'
-  _SOCKET_FIELDSENTRY._options = None
-  _SOCKET_FIELDSENTRY._serialized_options = b'8\001'
-  _globals['_SOCKET']._serialized_start=37
-  _globals['_SOCKET']._serialized_end=218
-  _globals['_SOCKET_FIELDSENTRY']._serialized_start=149
-  _globals['_SOCKET_FIELDSENTRY']._serialized_end=209
+  _SOCKETFIELDS_FIELDSENTRY._options = None
+  _SOCKETFIELDS_FIELDSENTRY._serialized_options = b'8\001'
+  _globals['_SOCKETFIELDS']._serialized_start=36
+  _globals['_SOCKETFIELDS']._serialized_end=161
+  _globals['_SOCKETFIELDS_FIELDSENTRY']._serialized_start=101
+  _globals['_SOCKETFIELDS_FIELDSENTRY']._serialized_end=161
+  _globals['_SOCKET']._serialized_start=163
+  _globals['_SOCKET']._serialized_end=278
 # @@protoc_insertion_point(module_scope)

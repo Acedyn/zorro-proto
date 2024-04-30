@@ -27,10 +27,9 @@ message MemoryFsSettings {
 
 // Settings for a selected file system
 message FileSystemSettings {
-  FileSystemType file_system_type = 1;
   oneof file_system_settings {
-    OsFsSettings os = 2;
-    IndexedDbFsSettings indexedDb = 3;
-    MemoryFsSettings memory = 4;
+    OsFsSettings os = 1;
+    IndexedDbFsSettings indexedDb = 2;
+    MemoryFsSettings memory = 3;
   }
 }

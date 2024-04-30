@@ -3,6 +3,11 @@ syntax = "proto3";
 package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/gen/protos/tools";
 
+// Since protobuf does not allows maps in oneofs we must create a message for it
+message SocketFields {
+  map<string, Socket> fields = 1;
+}
+
 // A socket acts as a payload for the input/output between two tools
 message Socket {
   // Human representation of the expected datatype
@@ -13,9 +18,9 @@ message Socket {
     string link = 2;
     // The raw data is a raw value that output from the command
     bytes raw = 3;
+    // Nested values can be linked or set individually
+    SocketFields fields = 4;
   }
   // The human readable value in json
-  bytes json = 4;
-  // Nested values can be linked or set individually
-  map<string, Socket> fields = 5;
+  bytes json = 5;
 }

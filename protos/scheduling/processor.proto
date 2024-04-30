@@ -1,9 +1,9 @@
 syntax = "proto3";
 
 package zorro;
-option go_package = "github.com/Acedyn/zorro-proto/gen/protos/processor";
+option go_package = "github.com/Acedyn/zorro-proto/gen/protos/scheduling";
 
-import "protos/processor/processor_status.proto";
+import "protos/scheduling/processor_status.proto";
 
 // Processors are responsible for executing commands
 message Processor {
