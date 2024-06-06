@@ -4,6 +4,17 @@ package zorro;
 option go_package = "github.com/Acedyn/zorro-proto/gen/protos/scheduling";
 
 import "protos/scheduling/processor_status.proto";
+import "protos/filesystem/fs.proto";
+
+// Information to locate the processor
+message ProcessorPath {
+  // The file system in wich we can find the processor
+  FileSystemSettings file_system = 1;
+  // Template to run the program without the processor running
+  string start_program_template = 2;
+  // Template to run the program with the processor running
+  string start_processor_template = 3;
+}
 
 // Processors are responsible for executing commands
 message Processor {
@@ -15,19 +26,15 @@ message Processor {
   string version = 3;
   // User friently version of the name without all its contraints
   string label = 4;
-  // Paths where we should look for the executable
-  repeated string paths = 5;
   // Defines if this processor can be used as a substitute for other processors
-  repeated string subsets = 6;
-  // Template to run the program without the processor running
-  string start_program_template = 7;
-  // Template to run the program with the processor running
-  string start_processor_template = 8;
+  repeated string subsets = 5;
+  // List of paths to search in to start the processor
+  repeated ProcessorPath paths = 6;
   // Help knowing at which state is the processor
-  ProcessorStatus status = 9;
+  ProcessorStatus status = 7;
   // Extra data used mainly for filters
-  map<string, string> metadata = 10;
+  map<string, string> metadata = 8;
   // Used to list the output logs by timestamps
-  map<int64, string> stdout = 11;
-  map<int64, string> stderr = 12;
+  map<int64, string> stdout = 9;
+  map<int64, string> stderr = 10;
 }

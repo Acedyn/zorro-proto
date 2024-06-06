@@ -12,7 +12,7 @@ message SocketFields {
 message Socket {
   // Human representation of the expected datatype
   string kind = 1;
-  // The value can take two forms
+  // The value can take three forms
   oneof value {
     // A socket can reference an other
     string link = 2;

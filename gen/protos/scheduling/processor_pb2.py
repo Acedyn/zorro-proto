@@ -12,9 +12,10 @@ _sym_db = _symbol_database.Default()
 
 
 from protos.scheduling import processor_status_pb2 as protos_dot_scheduling_dot_processor__status__pb2
+from protos.filesystem import fs_pb2 as protos_dot_filesystem_dot_fs__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!protos/scheduling/processor.proto\x12\x05zorro\x1a(protos/scheduling/processor_status.proto\"\xec\x03\n\tProcessor\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\x03 \x01(\t\x12\r\n\x05label\x18\x04 \x01(\t\x12\r\n\x05paths\x18\x05 \x03(\t\x12\x0f\n\x07subsets\x18\x06 \x03(\t\x12\x1e\n\x16start_program_template\x18\x07 \x01(\t\x12 \n\x18start_processor_template\x18\x08 \x01(\t\x12&\n\x06status\x18\t \x01(\x0e\x32\x16.zorro.ProcessorStatus\x12\x30\n\x08metadata\x18\n \x03(\x0b\x32\x1e.zorro.Processor.MetadataEntry\x12,\n\x06stdout\x18\x0b \x03(\x0b\x32\x1c.zorro.Processor.StdoutEntry\x12,\n\x06stderr\x18\x0c \x03(\x0b\x32\x1c.zorro.Processor.StderrEntry\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a-\n\x0bStdoutEntry\x12\x0b\n\x03key\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a-\n\x0bStderrEntry\x12\x0b\n\x03key\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x35Z3github.com/Acedyn/zorro-proto/gen/protos/schedulingb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!protos/scheduling/processor.proto\x12\x05zorro\x1a(protos/scheduling/processor_status.proto\x1a\x1aprotos/filesystem/fs.proto\"\x81\x01\n\rProcessorPath\x12.\n\x0b\x66ile_system\x18\x01 \x01(\x0b\x32\x19.zorro.FileSystemSettings\x12\x1e\n\x16start_program_template\x18\x02 \x01(\t\x12 \n\x18start_processor_template\x18\x03 \x01(\t\"\xc0\x03\n\tProcessor\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\x03 \x01(\t\x12\r\n\x05label\x18\x04 \x01(\t\x12\x0f\n\x07subsets\x18\x05 \x03(\t\x12#\n\x05paths\x18\x06 \x03(\x0b\x32\x14.zorro.ProcessorPath\x12&\n\x06status\x18\x07 \x01(\x0e\x32\x16.zorro.ProcessorStatus\x12\x30\n\x08metadata\x18\x08 \x03(\x0b\x32\x1e.zorro.Processor.MetadataEntry\x12,\n\x06stdout\x18\t \x03(\x0b\x32\x1c.zorro.Processor.StdoutEntry\x12,\n\x06stderr\x18\n \x03(\x0b\x32\x1c.zorro.Processor.StderrEntry\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a-\n\x0bStdoutEntry\x12\x0b\n\x03key\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a-\n\x0bStderrEntry\x12\x0b\n\x03key\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x35Z3github.com/Acedyn/zorro-proto/gen/protos/schedulingb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -28,12 +29,14 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _PROCESSOR_STDOUTENTRY._serialized_options = b'8\001'
   _PROCESSOR_STDERRENTRY._options = None
   _PROCESSOR_STDERRENTRY._serialized_options = b'8\001'
-  _globals['_PROCESSOR']._serialized_start=87
-  _globals['_PROCESSOR']._serialized_end=579
-  _globals['_PROCESSOR_METADATAENTRY']._serialized_start=438
-  _globals['_PROCESSOR_METADATAENTRY']._serialized_end=485
-  _globals['_PROCESSOR_STDOUTENTRY']._serialized_start=487
-  _globals['_PROCESSOR_STDOUTENTRY']._serialized_end=532
-  _globals['_PROCESSOR_STDERRENTRY']._serialized_start=534
-  _globals['_PROCESSOR_STDERRENTRY']._serialized_end=579
+  _globals['_PROCESSORPATH']._serialized_start=115
+  _globals['_PROCESSORPATH']._serialized_end=244
+  _globals['_PROCESSOR']._serialized_start=247
+  _globals['_PROCESSOR']._serialized_end=695
+  _globals['_PROCESSOR_METADATAENTRY']._serialized_start=554
+  _globals['_PROCESSOR_METADATAENTRY']._serialized_end=601
+  _globals['_PROCESSOR_STDOUTENTRY']._serialized_start=603
+  _globals['_PROCESSOR_STDOUTENTRY']._serialized_end=648
+  _globals['_PROCESSOR_STDERRENTRY']._serialized_start=650
+  _globals['_PROCESSOR_STDERRENTRY']._serialized_end=695
 # @@protoc_insertion_point(module_scope)

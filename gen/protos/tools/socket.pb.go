@@ -76,7 +76,7 @@ type Socket struct {
 
 	// Human representation of the expected datatype
 	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
-	// The value can take two forms
+	// The value can take three forms
 	//
 	// Types that are assignable to Value:
 	//

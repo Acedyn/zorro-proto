@@ -1,9 +1,22 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { FileSystemSettings } from "../filesystem/fs";
 import { ProcessorStatus, processorStatusFromJSON, processorStatusToJSON } from "./processor_status";
 import Long = require("long");
 
 export const protobufPackage = "zorro";
+
+/** Information to locate the processor */
+export interface ProcessorPath {
+  /** The file system in wich we can find the processor */
+  fileSystem:
+    | FileSystemSettings
+    | undefined;
+  /** Template to run the program without the processor running */
+  startProgramTemplate: string;
+  /** Template to run the program with the processor running */
+  startProcessorTemplate: string;
+}
 
 /** Processors are responsible for executing commands */
 export interface Processor {
@@ -15,14 +28,10 @@ export interface Processor {
   version: string;
   /** User friently version of the name without all its contraints */
   label: string;
-  /** Paths where we should look for the executable */
-  paths: string[];
   /** Defines if this processor can be used as a substitute for other processors */
   subsets: string[];
-  /** Template to run the program without the processor running */
-  startProgramTemplate: string;
-  /** Template to run the program with the processor running */
-  startProcessorTemplate: string;
+  /** List of paths to search in to start the processor */
+  paths: ProcessorPath[];
   /** Help knowing at which state is the processor */
   status: ProcessorStatus;
   /** Extra data used mainly for filters */
@@ -47,16 +56,107 @@ export interface Processor_StderrEntry {
   value: string;
 }
 
+function createBaseProcessorPath(): ProcessorPath {
+  return { fileSystem: undefined, startProgramTemplate: "", startProcessorTemplate: "" };
+}
+
+export const ProcessorPath = {
+  encode(message: ProcessorPath, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.fileSystem !== undefined) {
+      FileSystemSettings.encode(message.fileSystem, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.startProgramTemplate !== "") {
+      writer.uint32(18).string(message.startProgramTemplate);
+    }
+    if (message.startProcessorTemplate !== "") {
+      writer.uint32(26).string(message.startProcessorTemplate);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProcessorPath {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseProcessorPath();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.fileSystem = FileSystemSettings.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.startProgramTemplate = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.startProcessorTemplate = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ProcessorPath {
+    return {
+      fileSystem: isSet(object.fileSystem) ? FileSystemSettings.fromJSON(object.fileSystem) : undefined,
+      startProgramTemplate: isSet(object.startProgramTemplate) ? globalThis.String(object.startProgramTemplate) : "",
+      startProcessorTemplate: isSet(object.startProcessorTemplate)
+        ? globalThis.String(object.startProcessorTemplate)
+        : "",
+    };
+  },
+
+  toJSON(message: ProcessorPath): unknown {
+    const obj: any = {};
+    if (message.fileSystem !== undefined) {
+      obj.fileSystem = FileSystemSettings.toJSON(message.fileSystem);
+    }
+    if (message.startProgramTemplate !== "") {
+      obj.startProgramTemplate = message.startProgramTemplate;
+    }
+    if (message.startProcessorTemplate !== "") {
+      obj.startProcessorTemplate = message.startProcessorTemplate;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ProcessorPath>, I>>(base?: I): ProcessorPath {
+    return ProcessorPath.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ProcessorPath>, I>>(object: I): ProcessorPath {
+    const message = createBaseProcessorPath();
+    message.fileSystem = (object.fileSystem !== undefined && object.fileSystem !== null)
+      ? FileSystemSettings.fromPartial(object.fileSystem)
+      : undefined;
+    message.startProgramTemplate = object.startProgramTemplate ?? "";
+    message.startProcessorTemplate = object.startProcessorTemplate ?? "";
+    return message;
+  },
+};
+
 function createBaseProcessor(): Processor {
   return {
     id: "",
     name: "",
     version: "",
     label: "",
-    paths: [],
     subsets: [],
-    startProgramTemplate: "",
-    startProcessorTemplate: "",
+    paths: [],
     status: 0,
     metadata: {},
     stdout: {},
@@ -78,29 +178,23 @@ export const Processor = {
     if (message.label !== "") {
       writer.uint32(34).string(message.label);
     }
-    for (const v of message.paths) {
+    for (const v of message.subsets) {
       writer.uint32(42).string(v!);
     }
-    for (const v of message.subsets) {
-      writer.uint32(50).string(v!);
-    }
-    if (message.startProgramTemplate !== "") {
-      writer.uint32(58).string(message.startProgramTemplate);
-    }
-    if (message.startProcessorTemplate !== "") {
-      writer.uint32(66).string(message.startProcessorTemplate);
+    for (const v of message.paths) {
+      ProcessorPath.encode(v!, writer.uint32(50).fork()).ldelim();
     }
     if (message.status !== 0) {
-      writer.uint32(72).int32(message.status);
+      writer.uint32(56).int32(message.status);
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
-      Processor_MetadataEntry.encode({ key: key as any, value }, writer.uint32(82).fork()).ldelim();
+      Processor_MetadataEntry.encode({ key: key as any, value }, writer.uint32(66).fork()).ldelim();
     });
     Object.entries(message.stdout).forEach(([key, value]) => {
-      Processor_StdoutEntry.encode({ key: key as any, value }, writer.uint32(90).fork()).ldelim();
+      Processor_StdoutEntry.encode({ key: key as any, value }, writer.uint32(74).fork()).ldelim();
     });
     Object.entries(message.stderr).forEach(([key, value]) => {
-      Processor_StderrEntry.encode({ key: key as any, value }, writer.uint32(98).fork()).ldelim();
+      Processor_StderrEntry.encode({ key: key as any, value }, writer.uint32(82).fork()).ldelim();
     });
     return writer;
   },
@@ -145,64 +239,50 @@ export const Processor = {
             break;
           }
 
-          message.paths.push(reader.string());
+          message.subsets.push(reader.string());
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.subsets.push(reader.string());
+          message.paths.push(ProcessorPath.decode(reader, reader.uint32()));
           continue;
         case 7:
-          if (tag !== 58) {
+          if (tag !== 56) {
             break;
           }
 
-          message.startProgramTemplate = reader.string();
+          message.status = reader.int32() as any;
           continue;
         case 8:
           if (tag !== 66) {
             break;
           }
 
-          message.startProcessorTemplate = reader.string();
+          const entry8 = Processor_MetadataEntry.decode(reader, reader.uint32());
+          if (entry8.value !== undefined) {
+            message.metadata[entry8.key] = entry8.value;
+          }
           continue;
         case 9:
-          if (tag !== 72) {
+          if (tag !== 74) {
             break;
           }
 
-          message.status = reader.int32() as any;
+          const entry9 = Processor_StdoutEntry.decode(reader, reader.uint32());
+          if (entry9.value !== undefined) {
+            message.stdout[entry9.key] = entry9.value;
+          }
           continue;
         case 10:
           if (tag !== 82) {
             break;
           }
 
-          const entry10 = Processor_MetadataEntry.decode(reader, reader.uint32());
+          const entry10 = Processor_StderrEntry.decode(reader, reader.uint32());
           if (entry10.value !== undefined) {
-            message.metadata[entry10.key] = entry10.value;
-          }
-          continue;
-        case 11:
-          if (tag !== 90) {
-            break;
-          }
-
-          const entry11 = Processor_StdoutEntry.decode(reader, reader.uint32());
-          if (entry11.value !== undefined) {
-            message.stdout[entry11.key] = entry11.value;
-          }
-          continue;
-        case 12:
-          if (tag !== 98) {
-            break;
-          }
-
-          const entry12 = Processor_StderrEntry.decode(reader, reader.uint32());
-          if (entry12.value !== undefined) {
-            message.stderr[entry12.key] = entry12.value;
+            message.stderr[entry10.key] = entry10.value;
           }
           continue;
       }
@@ -220,12 +300,8 @@ export const Processor = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       version: isSet(object.version) ? globalThis.String(object.version) : "",
       label: isSet(object.label) ? globalThis.String(object.label) : "",
-      paths: globalThis.Array.isArray(object?.paths) ? object.paths.map((e: any) => globalThis.String(e)) : [],
       subsets: globalThis.Array.isArray(object?.subsets) ? object.subsets.map((e: any) => globalThis.String(e)) : [],
-      startProgramTemplate: isSet(object.startProgramTemplate) ? globalThis.String(object.startProgramTemplate) : "",
-      startProcessorTemplate: isSet(object.startProcessorTemplate)
-        ? globalThis.String(object.startProcessorTemplate)
-        : "",
+      paths: globalThis.Array.isArray(object?.paths) ? object.paths.map((e: any) => ProcessorPath.fromJSON(e)) : [],
       status: isSet(object.status) ? processorStatusFromJSON(object.status) : 0,
       metadata: isObject(object.metadata)
         ? Object.entries(object.metadata).reduce<{ [key: string]: string }>((acc, [key, value]) => {
@@ -262,17 +338,11 @@ export const Processor = {
     if (message.label !== "") {
       obj.label = message.label;
     }
-    if (message.paths?.length) {
-      obj.paths = message.paths;
-    }
     if (message.subsets?.length) {
       obj.subsets = message.subsets;
     }
-    if (message.startProgramTemplate !== "") {
-      obj.startProgramTemplate = message.startProgramTemplate;
-    }
-    if (message.startProcessorTemplate !== "") {
-      obj.startProcessorTemplate = message.startProcessorTemplate;
+    if (message.paths?.length) {
+      obj.paths = message.paths.map((e) => ProcessorPath.toJSON(e));
     }
     if (message.status !== 0) {
       obj.status = processorStatusToJSON(message.status);
@@ -316,10 +386,8 @@ export const Processor = {
     message.name = object.name ?? "";
     message.version = object.version ?? "";
     message.label = object.label ?? "";
-    message.paths = object.paths?.map((e) => e) || [];
     message.subsets = object.subsets?.map((e) => e) || [];
-    message.startProgramTemplate = object.startProgramTemplate ?? "";
-    message.startProcessorTemplate = object.startProcessorTemplate ?? "";
+    message.paths = object.paths?.map((e) => ProcessorPath.fromPartial(e)) || [];
     message.status = object.status ?? 0;
     message.metadata = Object.entries(object.metadata ?? {}).reduce<{ [key: string]: string }>((acc, [key, value]) => {
       if (value !== undefined) {
