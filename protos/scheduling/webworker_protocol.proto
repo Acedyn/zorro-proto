@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package zorro;
+option go_package = "github.com/Acedyn/zorro-proto/gen/protos/scheduling";
+
+// Packets that defines the communication protocol between two processes
+message IpcPacket {
+  oneof packetType {
+    InitPacket initPacket = 1;
+    SdpExchange sdpExchange = 2;
+    WrtcForward wrtcForward = 3;
+  }
+}
+
+// Initialize the communication between the two processes
+message InitPacket {}
+
+// Send a SDP offer or answer as a json encoded string
+message SdpExchange {
+  oneof sdp {
+    string offer = 1;
+    string answer = 2;
+  }
+}
+
+// Forward data to be sent or received via wrtc
+message WrtcForward {
+  bytes data = 1;
+}

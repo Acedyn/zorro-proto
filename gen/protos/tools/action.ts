@@ -1,322 +1,250 @@
-/* eslint-disable */
-import * as _m0 from "protobufjs/minimal";
-import { Command } from "./command";
-import { ToolBase } from "./tool";
-
-export const protobufPackage = "zorro";
-
 /**
- * An action can be composed of different types of tools
- * They are linked together via the upstream key
- */
-export interface ActionChild {
-  command?: Command | undefined;
-  action?:
-    | Action
-    | undefined;
-  /** Defines the dependency of this action child */
-  upstream: string[];
-}
-
-/**
- * An action holds groups of subactions and commands.
- * It allows to chain and organize multiple commands into a dependency graph
- */
-export interface Action {
-  /** All tools are composed of this field that contains required infos */
-  base:
-    | ToolBase
-    | undefined;
-  /** The children form like a sub graph */
-  children: { [key: string]: ActionChild };
-}
-
-export interface Action_ChildrenEntry {
-  key: string;
-  value: ActionChild | undefined;
-}
-
-function createBaseActionChild(): ActionChild {
-  return { command: undefined, action: undefined, upstream: [] };
-}
-
-export const ActionChild = {
-  encode(message: ActionChild, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.command !== undefined) {
-      Command.encode(message.command, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.action !== undefined) {
-      Action.encode(message.action, writer.uint32(18).fork()).ldelim();
-    }
-    for (const v of message.upstream) {
-      writer.uint32(26).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ActionChild {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseActionChild();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.command = Command.decode(reader, reader.uint32());
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.action = Action.decode(reader, reader.uint32());
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.upstream.push(reader.string());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): ActionChild {
-    return {
-      command: isSet(object.command) ? Command.fromJSON(object.command) : undefined,
-      action: isSet(object.action) ? Action.fromJSON(object.action) : undefined,
-      upstream: globalThis.Array.isArray(object?.upstream) ? object.upstream.map((e: any) => globalThis.String(e)) : [],
-    };
-  },
-
-  toJSON(message: ActionChild): unknown {
-    const obj: any = {};
-    if (message.command !== undefined) {
-      obj.command = Command.toJSON(message.command);
-    }
-    if (message.action !== undefined) {
-      obj.action = Action.toJSON(message.action);
-    }
-    if (message.upstream?.length) {
-      obj.upstream = message.upstream;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ActionChild>, I>>(base?: I): ActionChild {
-    return ActionChild.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ActionChild>, I>>(object: I): ActionChild {
-    const message = createBaseActionChild();
-    message.command = (object.command !== undefined && object.command !== null)
-      ? Command.fromPartial(object.command)
-      : undefined;
-    message.action = (object.action !== undefined && object.action !== null)
-      ? Action.fromPartial(object.action)
-      : undefined;
-    message.upstream = object.upstream?.map((e) => e) || [];
-    return message;
-  },
-};
-
-function createBaseAction(): Action {
-  return { base: undefined, children: {} };
-}
-
-export const Action = {
-  encode(message: Action, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.base !== undefined) {
-      ToolBase.encode(message.base, writer.uint32(10).fork()).ldelim();
-    }
-    Object.entries(message.children).forEach(([key, value]) => {
-      Action_ChildrenEntry.encode({ key: key as any, value }, writer.uint32(18).fork()).ldelim();
-    });
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Action {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAction();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.base = ToolBase.decode(reader, reader.uint32());
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          const entry2 = Action_ChildrenEntry.decode(reader, reader.uint32());
-          if (entry2.value !== undefined) {
-            message.children[entry2.key] = entry2.value;
-          }
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Action {
-    return {
-      base: isSet(object.base) ? ToolBase.fromJSON(object.base) : undefined,
-      children: isObject(object.children)
-        ? Object.entries(object.children).reduce<{ [key: string]: ActionChild }>((acc, [key, value]) => {
-          acc[key] = ActionChild.fromJSON(value);
-          return acc;
-        }, {})
-        : {},
-    };
-  },
-
-  toJSON(message: Action): unknown {
-    const obj: any = {};
-    if (message.base !== undefined) {
-      obj.base = ToolBase.toJSON(message.base);
-    }
-    if (message.children) {
-      const entries = Object.entries(message.children);
-      if (entries.length > 0) {
-        obj.children = {};
-        entries.forEach(([k, v]) => {
-          obj.children[k] = ActionChild.toJSON(v);
-        });
-      }
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Action>, I>>(base?: I): Action {
-    return Action.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Action>, I>>(object: I): Action {
-    const message = createBaseAction();
-    message.base = (object.base !== undefined && object.base !== null) ? ToolBase.fromPartial(object.base) : undefined;
-    message.children = Object.entries(object.children ?? {}).reduce<{ [key: string]: ActionChild }>(
-      (acc, [key, value]) => {
-        if (value !== undefined) {
-          acc[key] = ActionChild.fromPartial(value);
+ * Generated by the protoc-gen-ts.  DO NOT EDIT!
+ * compiler version: 4.24.2
+ * source: protos/tools/action.proto
+ * git: https://github.com/thesayyn/protoc-gen-ts */
+import * as dependency_1 from "./tool";
+import * as dependency_2 from "./command";
+import * as pb_1 from "google-protobuf";
+export namespace zorro {
+    export class ActionChild extends pb_1.Message {
+        #one_of_decls: number[][] = [[1, 2]];
+        constructor(data?: any[] | ({
+            upstream?: string[];
+        } & (({
+            command?: dependency_2.zorro.Command;
+            action?: never;
+        } | {
+            command?: never;
+            action?: Action;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [3], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("command" in data && data.command != undefined) {
+                    this.command = data.command;
+                }
+                if ("action" in data && data.action != undefined) {
+                    this.action = data.action;
+                }
+                if ("upstream" in data && data.upstream != undefined) {
+                    this.upstream = data.upstream;
+                }
+            }
         }
-        return acc;
-      },
-      {},
-    );
-    return message;
-  },
-};
-
-function createBaseAction_ChildrenEntry(): Action_ChildrenEntry {
-  return { key: "", value: undefined };
-}
-
-export const Action_ChildrenEntry = {
-  encode(message: Action_ChildrenEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
+        get command() {
+            return pb_1.Message.getWrapperField(this, dependency_2.zorro.Command, 1) as dependency_2.zorro.Command;
+        }
+        set command(value: dependency_2.zorro.Command) {
+            pb_1.Message.setOneofWrapperField(this, 1, this.#one_of_decls[0], value);
+        }
+        get has_command() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get action() {
+            return pb_1.Message.getWrapperField(this, Action, 2) as Action;
+        }
+        set action(value: Action) {
+            pb_1.Message.setOneofWrapperField(this, 2, this.#one_of_decls[0], value);
+        }
+        get has_action() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get upstream() {
+            return pb_1.Message.getFieldWithDefault(this, 3, []) as string[];
+        }
+        set upstream(value: string[]) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get child() {
+            const cases: {
+                [index: number]: "none" | "command" | "action";
+            } = {
+                0: "none",
+                1: "command",
+                2: "action"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [1, 2])];
+        }
+        static fromObject(data: {
+            command?: ReturnType<typeof dependency_2.zorro.Command.prototype.toObject>;
+            action?: ReturnType<typeof Action.prototype.toObject>;
+            upstream?: string[];
+        }): ActionChild {
+            const message = new ActionChild({});
+            if (data.command != null) {
+                message.command = dependency_2.zorro.Command.fromObject(data.command);
+            }
+            if (data.action != null) {
+                message.action = Action.fromObject(data.action);
+            }
+            if (data.upstream != null) {
+                message.upstream = data.upstream;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                command?: ReturnType<typeof dependency_2.zorro.Command.prototype.toObject>;
+                action?: ReturnType<typeof Action.prototype.toObject>;
+                upstream?: string[];
+            } = {};
+            if (this.command != null) {
+                data.command = this.command.toObject();
+            }
+            if (this.action != null) {
+                data.action = this.action.toObject();
+            }
+            if (this.upstream != null) {
+                data.upstream = this.upstream;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_command)
+                writer.writeMessage(1, this.command, () => this.command.serialize(writer));
+            if (this.has_action)
+                writer.writeMessage(2, this.action, () => this.action.serialize(writer));
+            if (this.upstream.length)
+                writer.writeRepeatedString(3, this.upstream);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ActionChild {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ActionChild();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.command, () => message.command = dependency_2.zorro.Command.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.action, () => message.action = Action.deserialize(reader));
+                        break;
+                    case 3:
+                        pb_1.Message.addToRepeatedField(message, 3, reader.readString());
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ActionChild {
+            return ActionChild.deserialize(bytes);
+        }
     }
-    if (message.value !== undefined) {
-      ActionChild.encode(message.value, writer.uint32(18).fork()).ldelim();
+    export class Action extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            base?: dependency_1.zorro.ToolBase;
+            children?: Map<string, ActionChild>;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("base" in data && data.base != undefined) {
+                    this.base = data.base;
+                }
+                if ("children" in data && data.children != undefined) {
+                    this.children = data.children;
+                }
+            }
+            if (!this.children)
+                this.children = new Map();
+        }
+        get base() {
+            return pb_1.Message.getWrapperField(this, dependency_1.zorro.ToolBase, 1) as dependency_1.zorro.ToolBase;
+        }
+        set base(value: dependency_1.zorro.ToolBase) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_base() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get children() {
+            return pb_1.Message.getField(this, 2) as any as Map<string, ActionChild>;
+        }
+        set children(value: Map<string, ActionChild>) {
+            pb_1.Message.setField(this, 2, value as any);
+        }
+        static fromObject(data: {
+            base?: ReturnType<typeof dependency_1.zorro.ToolBase.prototype.toObject>;
+            children?: {
+                [key: string]: ReturnType<typeof ActionChild.prototype.toObject>;
+            };
+        }): Action {
+            const message = new Action({});
+            if (data.base != null) {
+                message.base = dependency_1.zorro.ToolBase.fromObject(data.base);
+            }
+            if (typeof data.children == "object") {
+                message.children = new Map(Object.entries(data.children).map(([key, value]) => [key, ActionChild.fromObject(value)]));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                base?: ReturnType<typeof dependency_1.zorro.ToolBase.prototype.toObject>;
+                children?: {
+                    [key: string]: ReturnType<typeof ActionChild.prototype.toObject>;
+                };
+            } = {};
+            if (this.base != null) {
+                data.base = this.base.toObject();
+            }
+            if (this.children != null) {
+                data.children = (Object.fromEntries)((Array.from)(this.children).map(([key, value]) => [key, value.toObject()]));
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_base)
+                writer.writeMessage(1, this.base, () => this.base.serialize(writer));
+            for (const [key, value] of this.children) {
+                writer.writeMessage(2, this.children, () => {
+                    writer.writeString(1, key);
+                    writer.writeMessage(2, value, () => value.serialize(writer));
+                });
+            }
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Action {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Action();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.base, () => message.base = dependency_1.zorro.ToolBase.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message, () => pb_1.Map.deserializeBinary(message.children as any, reader, reader.readString, () => {
+                            let value;
+                            reader.readMessage(message, () => value = ActionChild.deserialize(reader));
+                            return value;
+                        }));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Action {
+            return Action.deserialize(bytes);
+        }
     }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): Action_ChildrenEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAction_ChildrenEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = ActionChild.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Action_ChildrenEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? ActionChild.fromJSON(object.value) : undefined,
-    };
-  },
-
-  toJSON(message: Action_ChildrenEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = ActionChild.toJSON(message.value);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Action_ChildrenEntry>, I>>(base?: I): Action_ChildrenEntry {
-    return Action_ChildrenEntry.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Action_ChildrenEntry>, I>>(object: I): Action_ChildrenEntry {
-    const message = createBaseAction_ChildrenEntry();
-    message.key = object.key ?? "";
-    message.value = (object.value !== undefined && object.value !== null)
-      ? ActionChild.fromPartial(object.value)
-      : undefined;
-    return message;
-  },
-};
-
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
-
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }
